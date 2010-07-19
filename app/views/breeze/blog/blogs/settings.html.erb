@@ -1,0 +1,76 @@
+<% content_for :title, "Blog settings" %>
+
+<%= tabbed_layout do |tabs| %>
+  <% tabs.general :title => "General settings" do %>
+    <%= breeze_form_for :blog, :url => settings_admin_blogs_path, :method => :put do |form| %>
+      <%= scrollable_layout do %>
+        <h1>General settings</h1>
+        <%= form.fieldset :legend => "Dates and times" do %>
+        
+        <% end %>
+        <%= form.fieldset :legend => "Post settings" do %>
+        
+        <% end %>
+        <%= form.fieldset :legend => "Appearance" do %>
+        
+        <% end %>
+      <% end %>
+      <div class="fake-right-sidebar">
+        <%= form.submit "Save settings", :class => "large green save button" %>
+      </div>
+    <% end %>
+  <% end %>
+  <% tabs.comments :title => "Comments" do %>
+    <%= breeze_form_for :blog, :url => settings_admin_blogs_path, :method => :put do |form| %>
+      <%= scrollable_layout do %>
+        <h1>Comment settings</h1>
+        <%= form.fieldset :legend => "Moderation" do %>
+        
+        <% end %>
+        <%= form.fieldset :legend => "Notifications" do %>
+        
+        <% end %>
+        <%= form.fieldset :legend => "Spam control" do %>
+        
+        <% end %>
+      <% end %>
+      <div class="fake-right-sidebar">
+        <%= form.submit "Save settings", :class => "large green save button" %>
+      </div>
+    <% end %>
+  <% end %>
+  <% tabs.categories :title => "Categories" do %>
+    <%= scrollable_layout do %>
+      <h1>Categories</h1>
+    <% end %>
+  <% end %>
+  <% tabs.rss :title => "RSS" do %>
+    <%= breeze_form_for :blog, :url => settings_admin_blogs_path, :method => :put do |form| %>
+      <%= scrollable_layout do %>
+        <h1>RSS Feed settings</h1>
+        <%= form.fieldset do %>
+        
+        <% end %>
+      <% end %>
+      <div class="fake-right-sidebar">
+        <%= form.submit "Save settings", :class => "large green save button" %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :left do %>
+  <%= render :partial => "left" %>
+<% end %>
+
+<% content_for :right do %>
+  <%= pane_layout do |right| %>
+    <% right.header do %>
+      <%= link_to "New blog post", new_admin_blog_path, :class => "large new blog_post button" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "/breeze/stylesheets/blog.css" %>
+<% end %>

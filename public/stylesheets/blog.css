@@ -10,3 +10,47 @@
   font-size: 130%;
   vertical-align: middle;
 }
+
+#left .actions {
+  margin: 0px;
+  padding: 0px;
+}
+
+#left .actions li {
+  display: inline;
+  list-style: none;
+}
+
+#left .actions li a {
+  display: block;
+  background: #ccc;
+  margin: 0px 0px 8px;
+  padding: 8px;
+  color: #222;
+  text-decoration: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
+#left .actions li a strong {
+  display: block;
+  font-size: 125%;
+}
+
+#left .actions li a small {
+  display: block;
+  font-size: 85%;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+#left .actions li a:hover { background: #bbb; }
+
+#left .actions li.active a {
+  background: #999;
+  margin-right: -8px;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+}

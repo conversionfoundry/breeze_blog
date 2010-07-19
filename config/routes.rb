@@ -4,6 +4,8 @@ Rails.application.routes.draw do |map|
       collection do
         post :setup_default
         put :switch
+        get :settings
+        put :settings
       end
     end
   end
