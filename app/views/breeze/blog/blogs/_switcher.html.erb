@@ -1,0 +1,13 @@
+<div id="blog-switcher">
+  <%= form_tag switch_admin_blogs_path, :method => :put do %>
+    <label>Switch to:</label>
+    <%= select_tag :blog, options_for_select(blogs.collect { |b| [ b.title, b.id ] }, blog.id) %>
+  <% end %>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $('#blog-switcher select').change(function() {
+      $(this).closest('form').eq(0).each(function() { this.submit(); });
+    });
+  });
+</script>
