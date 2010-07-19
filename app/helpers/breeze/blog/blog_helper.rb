@@ -6,7 +6,7 @@ module Breeze
       def blog_switcher
         blogs = Breeze::Blog::Blog
         
-        return "" unless blogs.count > 1
+        return content_tag :h2, "Blog" unless blogs.count > 1
         render :partial => "switcher", :locals => { :blogs => blogs.all }
       end
     end
