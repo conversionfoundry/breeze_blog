@@ -7,7 +7,7 @@ module Breeze
       before_filter :check_for_blogs, :except => [ :setup_default ]
       
       def index
-        # @posts = blog.posts
+        @posts = blog.posts
       end
       
       def setup_default

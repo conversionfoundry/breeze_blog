@@ -5,7 +5,10 @@
     <h2></h2>
   <% end %>
   <% main.inner do %>
-    
+	  <%= scrollable_layout :id => :posts do %>
+	    <h1>Posts</h1>
+	    <%= render :partial => "post", :collection => @posts %>
+	  <% end %>
   <% end %>
 <% end %>
 

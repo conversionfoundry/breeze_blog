@@ -1,0 +1,21 @@
+We create posts. We select categories for a post, which can be used for navigation. We create tags for a post. We save a post as a draft or publish it - if the latter, we select a publishing date.
+
+We set blog settings for presentation of dates and times, appearance and blog settings [What does that include?]. We set RSS settings for blogs.
+
+We set comment settings for moderation, notifications, and spam control.
+
+A customer can view a list of posts for a blog. A customer can read a post and create comments. We may or may not vet comments (as per comment moderation settings).
+
+
+Functions
+
+View blog with list of posts
+Create posts
+Select post categories
+Create post tags
+Publish posts
+Read post
+Edit blog settings
+Edit blog RSS settings
+Edit comment settings
+Create comments
