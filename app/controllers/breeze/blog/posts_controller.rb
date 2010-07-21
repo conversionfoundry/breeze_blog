@@ -10,12 +10,11 @@ module Breeze
       end
       
       def new
-        @post = Post.new
+        @post = blog.posts.build :author => current_user
       end
       
       def create
-        # Get blog.id from session (current blog)
-        @post = Post.new(params[:post].merge(:blog_id => session[:blog_id]))
+        @post = blog.posts.build params[:post]
         if @post.save
           redirect_to blog_root_path
         else

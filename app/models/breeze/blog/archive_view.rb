@@ -1,6 +1,8 @@
 module Breeze
   module Blog
     class ArchiveView < IndexView
+      unloadable
+      
       attr_accessor :year, :month, :day
       
       def set_url_params(match)
@@ -8,7 +10,11 @@ module Breeze
       end
       
       def start_time
-        @start_time ||= Time.zone.local(*[ year, month, day ].compact)
+        @start_time ||= if year
+          Time.zone.local(*[ year, month, day ].compact)
+        else
+          Time.zone.now
+        end
       end
       
       def end_time
@@ -27,6 +33,13 @@ module Breeze
       
       def end_date
         end_time.to_date - 1.day
+      end
+      
+      def posts
+        super.where(
+          :published_at.gte => start_time.utc,
+          :published_at.lt  => end_time.utc
+        )
       end
     end
   end

@@ -1,0 +1,5 @@
+<%= content_tag :div, :class => "post hentry", :id => "post_#{post.id}" do %>
+  <h2><%= link_to post.title, post.permalink, :class => "entry-title" %></h2>
+  <%= render "/partials/blog/time", :time => post.time %>
+  <%= content_tag :div, post.summary, :class => "entry-summary" %>
+<% end %>

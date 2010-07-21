@@ -2,13 +2,20 @@ module Breeze
   module Blog
     class Blog < Breeze::Content::Page
       unloadable
-      
+
+      field :posts_per_page, :type => Integer, :default => 5
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       
       before_create :create_default_views
       
       def view_for(controller, request)
-        view_from_permalink request.path
+        if controller.admin_signed_in? && request.params[:view]
+          returning views.by_name(request.params[:view]) do |view|
+            view.with_url_params Breeze::Blog::PERMALINK.match(permalink)
+          end
+        else  
+          view_from_permalink request.path
+        end
       end
       
       def view_from_permalink(permalink)

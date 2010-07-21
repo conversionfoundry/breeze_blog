@@ -1,0 +1,9 @@
+<% if posts.any? %>
+  <%= will_paginate posts %>
+  <%= content_tag :div, :class => "posts hfeed" do %>
+    <%= render :partial => "/partials/blog/post", :collection => posts %>
+  <% end %>
+  <%= will_paginate posts %>
+<% else %>
+  <p>There are no posts to display.</p>
+<% end %>

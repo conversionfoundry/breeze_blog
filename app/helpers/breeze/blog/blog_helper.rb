@@ -13,12 +13,13 @@ module Breeze
       def blog_menu
         content_tag :ul, [
           blog_menu_item("Blog overview", "/admin/blog"),
-          blog_menu_item("Settings", "/admin/blog/settings")
+          blog_menu_item("Settings", "/admin/blog/settings"),
+          blog_menu_item("View blog", blog.permalink, :target => :_blank)
         ].join.html_safe, :class => :actions
       end
       
-      def blog_menu_item(name, path)
-        content_tag :li, link_to(name.html_safe, path),
+      def blog_menu_item(name, path, options = {})
+        content_tag :li, link_to(name.html_safe, path, options),
           :class => "#{:active if request.path == path}"
       end
     end

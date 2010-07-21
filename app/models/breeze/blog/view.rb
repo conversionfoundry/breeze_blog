@@ -1,8 +1,18 @@
 module Breeze
   module Blog
-    class View < Breeze::Content::View
+    class View < Breeze::Content::PageView
+      unloadable
+      
+      def blog
+        content
+      end
+      
       def posts
-        Post.descending(:published_at)
+        blog.posts.published.descending(:published_at)
+      end
+      
+      def page
+        (request && request.params[:page]) || 1
       end
       
       def with_url_params(match)
@@ -19,6 +29,12 @@ module Breeze
           "breeze/blog/#{name}"
         else
           content.template
+        end
+      end
+      
+      def variables_for_render
+        returning super do |vars|
+          vars[:posts] = posts.paginate :per_page => blog.posts_per_page, :page => page
         end
       end
     end

@@ -8,6 +8,15 @@
   <body>
     <div id="container">
       <h1>Blog post</h1>
+      <% if post.present? %>
+        <%= content_tag :div, :class => "post hentry", :id => "post_#{post.id}" do %>
+          <h2><%= link_to post.title, post.permalink, :class => "entry-title" %></h2>
+          <%= render "/partials/blog/time", :time => post.time %>
+          <%= content_tag :div, post.body, :class => "entry-summary" %>
+        <% end %>
+      <% else %>
+        <p>The post you're looking for was not found. Try <%= link_to "the index", page.permalink %>.
+      <% end %>
     </div>
   </body>
 </html>

@@ -1,0 +1,7 @@
+<%= content_tag :abbr, :title => time.iso8601 do %>
+  <%= content_tag :span, time.strftime('%A'), :class => "weekday" %>
+  <%= content_tag :span, time.strftime('%e'), :class => "day" %>
+  <%= content_tag :span, time.strftime('%B'), :class => "month" %>
+  <%= content_tag :span, time.strftime('%Y'), :class => "year" %>
+  <%= content_tag :span, time.strftime('%l:%M %p').downcase, :class => "time" %>
+<% end %>
