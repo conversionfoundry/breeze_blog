@@ -12,6 +12,7 @@ module Breeze
       field :title
       field :slug
       field :body
+      field :published_at, :type => DateTime
       
       validates_presence_of :title, :slug, :body
       validates_presence_of :author_id, :message => "must be selected"
