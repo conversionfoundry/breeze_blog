@@ -4,7 +4,7 @@ We set blog settings for presentation of dates and times, appearance and blog se
 
 We set comment settings for moderation, notifications, and spam control.
 
-A customer can view a list of posts for a blog. A customer can read a post and create comments. We may or may not vet comments (as per comment moderation settings).
+A customer can view a list of posts for a blog [How much of each post should be shown?]. A customer can read a post and create comments. We may or may not vet comments (as per comment moderation settings). We respond to comments.
 
 
 Functions
@@ -19,3 +19,4 @@ Edit blog settings
 Edit blog RSS settings
 Edit comment settings
 Create comments
+Respond to comments

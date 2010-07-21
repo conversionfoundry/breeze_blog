@@ -6,7 +6,7 @@
   <% end %>
   <% main.inner do %>
     <h1>You have no blogs set up.</h1>
-    <%= form_tag setup_default_admin_blogs_path do %>
+    <%= form_tag admin_blog_setup_default_path do %>
       <p>
         <%= submit_tag "Click here", :class => :button %> to set up a new blog at <tt>/blog</tt>.
       </p>

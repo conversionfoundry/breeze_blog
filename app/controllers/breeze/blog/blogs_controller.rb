@@ -22,6 +22,8 @@ module Breeze
       end
       
     protected
+
+    # TODO: Methods getting blog are duplicated in PostsController. Refactor to module. CB 21 July 2010.
       def check_for_blogs
         unless blog
           render :action => "no_blog"

@@ -7,7 +7,7 @@ module Breeze
         blogs = Breeze::Blog::Blog
         
         return content_tag :h2, "Blog" unless blogs.count > 1
-        render :partial => "switcher", :locals => { :blogs => blogs.all }
+        render :partial => "/breeze/blog/blogs/switcher", :locals => { :blogs => blogs.all }
       end
       
       def blog_menu

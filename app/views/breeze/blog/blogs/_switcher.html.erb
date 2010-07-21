@@ -1,5 +1,5 @@
 <div id="blog-switcher">
-  <%= form_tag switch_admin_blogs_path, :method => :put do %>
+  <%= form_tag admin_blog_switch_path, :method => :put do %>
     <label>Blog:</label>
     <%= select_tag :blog, options_for_select(blogs.collect { |b| [ b.title, b.id ] }, blog.id) %>
   <% end %>
