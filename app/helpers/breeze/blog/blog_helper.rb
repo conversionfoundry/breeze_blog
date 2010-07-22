@@ -3,25 +3,44 @@ module Breeze
     module BlogHelper
       unloadable
       
-      def blog_switcher
-        blogs = Breeze::Blog::Blog
-        
-        return content_tag :h2, "Blog" unless blogs.count > 1
-        render :partial => "/breeze/blog/blogs/switcher", :locals => { :blogs => blogs.all }
+      def comments_link(post)
+        str = if post.comments_count.blank? || post.comments_count.zero?
+          "No comments"
+        else
+          pluralize post.comments_count, "comment"
+        end
+        link_to str, "#{post.permalink}#comments"
       end
       
-      def blog_menu
-        content_tag :ul, [
-          blog_menu_item("Blog overview", "/admin/blog"),
-          blog_menu_item("Posts", "/admin/blog/posts"),
-          blog_menu_item("Settings", "/admin/blog/settings"),
-          blog_menu_item("View blog", blog.permalink, :target => :_blank)
-        ].join.html_safe, :class => :actions
+      def replies_to(comment, comments)
+        replies = comments.select { |c| c.parent_id == comment.id }
+        unless replies.empty?
+          content_tag :div, render(:partial => "comment", :collection => replies, :locals => { :comments => comments }), :class => "comment-replies"
+        end
       end
       
-      def blog_menu_item(name, path, options = {})
-        content_tag :li, link_to(name.html_safe, path, options),
-          :class => "#{:active if request.path == path}"
+      def comment_form(params = {})
+        comment = view.comment || post.comments.build(params)
+        if comment.new_record?
+          form_for comment, :as => :comment, :url => post.permalink, :method => :post, :builder => Breeze::Blog::FormBuilder do |form|
+            render "/partials/blog/comment_form", :form => form, :comment => form.object
+          end
+        else
+          render "/partials/blog/comment_posted", :comment => comment
+        end
+      end
+      
+      def body_with_linked_replies(comment)
+        return comment.body unless comment.body =~ /\@/
+        commenters = comment.post.commenters.select { |h| h[:created_at] < comment.created_at }
+        comment.body.gsub(/\@([\w ]+)/) do |link|
+          match = commenters.detect { |h| link.starts_with?("@" + h[:name]) }
+          if match
+            link.sub /^\@#{Regexp.escape(match[:name])}/, link_to("@#{match[:name]}", "#comment_#{match[:id]}", :class => "in-reply-to")
+          else
+            "@#{link}"
+          end
+        end
       end
     end
   end
