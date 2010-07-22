@@ -14,6 +14,8 @@
           <%= render "/partials/blog/time", :time => post.time %>
           <%= content_tag :div, post.body, :class => "entry-summary" %>
         <% end %>
+        <%= render "/partials/blog/comments", :comments => comments %>
+        <%= comment_form if post.accepts_comments? %>
       <% else %>
         <p>The post you're looking for was not found. Try <%= link_to "the index", page.permalink %>.
       <% end %>

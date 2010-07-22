@@ -1,0 +1,8 @@
+<%= form.error_messages %>
+<%= form.fieldset do %>
+  <%= form.text_field :name, :required => true %>
+  <%= form.text_field :email, :required => true %>
+  <%= form.text_field :website %>
+  <%= form.text_area :body, :required => true, :rows => 6, :hint => "You can use #{link_to "Markdown", "http://daringfireball.net/projects/markdown/syntax", :target => :_blank} to format your comment".html_safe %>
+<% end %>
+<%= form.submit "Post comment", :class => "button" %>

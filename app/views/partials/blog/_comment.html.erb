@@ -1,0 +1,8 @@
+<%= content_tag :div, :id => "comment_#{comment.id}", :class => "comment#{' authenticated' if comment.authenticated?}" do %>
+  <%= content_tag :div, :class => "comment-meta" do %>
+    <%= comment.created_at.to_formatted_s(:long) %>
+    <%= link_to_unless comment.website.blank?, comment.name, comment.website %>
+  <% end %>
+  <%= content_tag :div, comment.linked_body, :class => "comment-body" %>
+  <%= replies_to comment, comments %>
+<% end %>

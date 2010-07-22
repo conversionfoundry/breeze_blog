@@ -2,7 +2,7 @@ module Breeze
   module Blog
     class BlogsController < Breeze::Admin::AdminController
       unloadable
-      helper Breeze::Blog::BlogHelper
+      helper Breeze::Blog::BlogAdminHelper
       
       before_filter :check_for_blogs, :except => [ :setup_default ]
       
