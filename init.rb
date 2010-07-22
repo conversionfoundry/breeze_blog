@@ -11,3 +11,11 @@ end
 Breeze.hook :admin_menu do |menu, user|
   menu << { :name => "Blog", :path => "/admin/blog" } if user.can? :manage, Breeze::Content::Item
 end
+
+Breeze.hook :get_content_by_permalink do |permalink_or_content|
+  case permalink_or_content
+  when Breeze::Content::Item then permalink_or_content
+  when String then Breeze::Blog::Blog.find_by_permalink permalink_or_content
+  else nil
+  end
+end
