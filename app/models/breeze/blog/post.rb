@@ -14,12 +14,15 @@ module Breeze
       field :title
       field :slug
       field :body, :markdown => true
+      field :intro
       field :published_at, :type => Time
       
       validates_presence_of :title, :slug, :body
       validates_presence_of :author_id, :message => "must be selected"
       
       scope :published, lambda { where(:published_at.lt => Time.now.utc) }
+      scope :pending,   lambda { where(:published_at.gt => Time.now.utc) }
+      scope :draft,     lambda { where(:published_at => nil) }
       
       def summary
         # TODO: automatically create summaries, but allow manual customisation.
@@ -30,6 +33,18 @@ module Breeze
       # returns a date suitable for public display.
       def time
         published_at || created_at
+      end
+      
+      def published?
+        published_at.present? && published_at <= DateTime.now
+      end
+           
+      def pending?
+        published_at.present? && published_at > DateTime.now
+      end
+      
+      def status
+        published? ? :published : :draft
       end
       
     protected

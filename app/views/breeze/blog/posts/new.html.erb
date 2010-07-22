@@ -15,7 +15,8 @@
 		  <% end %>
 
 		  <%= fake_right_sidebar do %>
-		    <%= submit_tag "Save", :class => "large green save button" %>
+		    <%= form.text_field :published_at %> 
+			  <%= submit_tag "Save", :class => "large green save button" %>
 		  <% end %>
 		<% end %>
 	<% end %>
@@ -33,6 +34,3 @@
   <% end %>
 <% end %>
 
-<% content_for :head do %>
-  <%= stylesheet_link_tag "/breeze/stylesheets/blog.css" %>
-<% end %>

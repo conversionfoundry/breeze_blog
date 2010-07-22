@@ -1,0 +1,35 @@
+<%# form_tag posts_blog_path do -%>
+  <div id="<%= view %>-posts" class="posts-container container">
+    <%= hidden_field_tag :mode, nil, :id => "#{view}_mode" %>
+    <%= hidden_field_tag :view, view, :id => "#{view}_view" %>
+    <div class="table-tasks-popup">
+      <p>
+        <%#= link_to "Delete selected", "#", :class => "delete-selected-posts", :rel => :delete %>
+      </p>
+    </div>
+    <table class="fancy posts">
+      <thead>
+        <tr>
+          <th class="first" style="width:5%;"><input class="checkbox select-all" type="checkbox" /></th>
+          <th style="width:35%;">Post</th>
+          <th style="width:15%;">Author</th>
+          <th style="width:20%;">Tags</th>
+          <th style="width:10%;">Comments</th>
+          <th class="last" style="width:15%;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @posts.empty? -%>
+          <tr><td class="empty" colspan="7">There are no <%= view %> posts to show here.</td></tr>
+        <% else -%>
+          <%= render :partial => "post", :collection => posts %>
+        <% end -%>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7"><%#= will_paginate @posts, :param_name => :"_page" %>&nbsp;</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+<%# end -%>
