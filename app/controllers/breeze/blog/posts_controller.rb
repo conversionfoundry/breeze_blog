@@ -19,7 +19,7 @@ module Breeze
       def create
         @post = blog.posts.build params[:post]
         if @post.save
-          redirect_to blog_root_path
+          redirect_to admin_blog_posts_path
         else
           render :action => "new"
         end
