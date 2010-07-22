@@ -28,6 +28,11 @@ module Breeze
         end
       end
       
+      def mass_destroy
+        @comments = blog.comments.find params[:comment_ids]
+        @comments.map &:destroy
+      end
+      
       def destroy
         comment.try :destroy
       end

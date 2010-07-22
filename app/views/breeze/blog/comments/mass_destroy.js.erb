@@ -1,0 +1,1 @@
+$('<%= @comments.map { |c| "#comment_#{c.id}" }.join(", ") %>').fadeOut(function() { $(this).remove(); });

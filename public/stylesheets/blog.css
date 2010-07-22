@@ -184,6 +184,29 @@ table.posts .post-controls {
 	visibility: hidden;
 }
 
+.container .with-selected {
+  position: absolute;
+  left: 0px;
+  top: -32px;
+  background: #ffc;
+  padding: 4px 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+  -webkit-border-radius: 4px;
+}
+
+.container .with-selected:after {
+  content: ".";
+  text-indent: -2em;
+  position: absolute;
+  left: 16px;
+  bottom: -8px;
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  border-left: 8px solid #ffc;
+  border-bottom: 8px solid transparent;
+}
+
 /* @end */
 
 .header .button {
@@ -195,8 +218,13 @@ table.posts .post-controls {
 
 /* Comments {{{ */
 
+.tab-pane h2 {
+  margin: 16px 16px 0px;
+}
+
 .comments-container {
   margin: 16px;
+  position: relative;
 }
 
 table.comments tr.comment td {
@@ -245,6 +273,9 @@ table.comments img.gravatar {
   text-shadow: #ec008c 0px 0px 4px;
   cursor: pointer;
 }
+
+#tab_published .with-selected .approve,
+#tab_spam .with-selected .spam { display: none; }
 
 /*}}}*/
 

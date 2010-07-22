@@ -1,5 +1,11 @@
 <div class="comments-container container">
   <%= form_tag admin_blog_comments_path, :method => :put do -%>
+    <div class="with-selected" style="display: none">
+      <strong>With selected:</strong>
+      <%= link_to "Approve", admin_blog_comments_path, :class => "small green approve button" %>
+      <%= link_to "Spam", admin_blog_comments_path, :class => "small black spam button" %>
+      <%= link_to "Delete", admin_blog_comments_path, :class => "small red delete button" %>
+    </div>
     <table class="fancy comments">
       <thead>
         <tr>

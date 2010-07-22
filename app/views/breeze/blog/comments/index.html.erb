@@ -2,12 +2,15 @@
 
 <%= tabbed_layout do |tabs| %>
   <% tabs.published :title => "Published" do -%>
+    <h2>Published comments</h2>
     <%= render "comments", :comments => blog.comments.published.paginate %>
   <% end -%>
   <% tabs.pending :title => "Pending" do -%>
+    <h2>Pending comments</h2>
     <%= render "comments", :comments => blog.comments.pending.paginate %>
   <% end -%>
   <% tabs.spam :title => "Spam" do -%>
+    <h2>Spam comments</h2>
     <%= render "comments", :comments => blog.comments.spam.paginate %>
   <% end -%>
 <% end %>
@@ -72,6 +75,30 @@
       } else {
         comments.removeAttr('checked');
       }
+    });
+    
+    $('.comments-container :checkbox').live('change', function() {
+      var container = $(this).closest('.container');
+      $('.with-selected', container).toggle($('tbody :checked', container).length > 0);
+    });
+    
+    $('.comments-container .with-selected .button').live('click', function() {
+      var comment_ids = [];
+      var comments = $(this).closest('.container').find('tbody :checked').closest('.comment');
+      comments.each(function() { comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]=')); });
+      var method = $(this).is('.delete') ? 'delete' : 'put';
+      var data = '_method=' + method + '&' + comment_ids.join('&');
+      if ($(this).is('.approve')) { data += '&comment[status]=published'; }
+      if ($(this).is('.spam')) { data += '&comment[status]=spam'; }
+      $.ajax({
+        url:'/admin/blog/comments.js',
+        type:'post',
+        dataType:'script',
+        data: data
+      });
+      $(this).closest('.container').find('thead :checked').removeAttr('checked');
+      $(this).closest('.with-selected').hide();
+      return false;
     });
   });
 </script>

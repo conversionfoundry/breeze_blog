@@ -10,6 +10,7 @@ Rails.application.routes.draw do |map|
 
     resources :posts
     put "comments(.:format)" => "comments#mass_update"
+    delete "comments(.:format)" => "comments#mass_destroy"
     resources :comments do
       member do
         put :approve
