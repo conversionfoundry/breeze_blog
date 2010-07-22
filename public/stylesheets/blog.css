@@ -1,56 +1,147 @@
+/* @group Left Panel */
+
 #left #blog-switcher {
-  padding: 8px;
-  text-shadow: rgba(255, 255, 255, 0.5) 0px 1px;
+	padding: 8px;
+	text-shadow: rgba(255, 255, 255, 0.5) 0px 1px;
 }
 
 #left #blog-switcher label {
-  float: left;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 130%;
-  vertical-align: middle;
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 130%;
+	vertical-align: middle;
 }
 
 #left .actions {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 #left .actions li {
-  display: inline;
-  list-style: none;
+	display: inline;
+	list-style: none;
 }
 
 #left .actions li a {
-  display: block;
-  background: #ccc;
-  margin: 0px 0px 8px;
-  padding: 8px;
-  color: #222;
-  text-decoration: none;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+	display: block;
+	background: #ccc;
+	margin: 0px 0px 8px;
+	padding: 8px;
+	color: #222;
+	text-decoration: none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
 }
 
 #left .actions li a strong {
-  display: block;
-  font-size: 125%;
+	display: block;
+	font-size: 125%;
 }
 
 #left .actions li a small {
-  display: block;
-  font-size: 85%;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+	display: block;
+	font-size: 85%;
+	color: #666;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
 }
 
-#left .actions li a:hover { background: #bbb; }
+#left .actions li a:hover {
+	background: #bbb;
+}
 
 #left .actions li.active a {
-  background: #999;
-  margin-right: -8px;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+	background: #999;
+	margin-right: -8px;
+	-webkit-border-top-right-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
 }
+
+/* @end */
+
+/* @group Tables */
+
+table.fancy {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	margin: 0;
+	width: 100%;
+}
+
+table.fancy thead th {
+    /*background: url(../images/tables/header.png) no-repeat 50% 0px;*/
+    border-bottom: 1px solid #ccc;
+	height: 24px;
+	line-height: 24px;
+	vertical-align: middle;
+	padding: 0px 8px;
+	text-align: left;
+}
+
+table.fancy thead th.first {
+	background-position: 0px 0px;
+}
+
+table.fancy thead th.last {
+	background-position: 100% 0px;
+}
+
+table.fancy tbody td {
+	border-bottom: 1px solid #a9b4b9;
+	padding: 0px 8px;
+	vertical-align: top;
+}
+
+table.fancy tfoot td {
+	background: #ddd;
+	padding: 4px 8px;
+}
+
+table.fancy tfoot .pagination a, table.fancy tfoot .pagination span {
+	padding: .2em .3em;
+}
+
+table.fancy tfoot .pagination span.disabled {
+	color: #999;
+}
+
+table.fancy tfoot .pagination span.current {
+	background: white;
+	min-width: 16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+table.fancy tfoot .pagination a {
+	text-decoration: none;
+	color: #333;
+}
+
+table.fancy tfoot .pagination a:hover, table.fancy tfoot .pagination a:focus {
+	text-decoration: underline;
+}
+
+table.fancy td.empty {
+	padding: 3em 8px;
+	text-align: center;
+	vertical-align: middle;
+	color: #999;
+}
+
+table.fancy tbody tr:hover td.empty {
+	background: none;
+}
+
+table td.odd,  table th.odd,  table tr.odd td,  table tr.odd th {
+	background: none;
+}
+
+table td.even, table th.even, table tr.even td, table tr.even th {
+	background-color: #ddd;
+}
+
+
+
+/* @end */

@@ -1,2 +1,17 @@
-<h2><%= post.title %></h2>
-<p><%= post.body %></p>
+<tr>
+  <td><%= check_box_tag "post_ids[]", post.id %></td>
+  <td class="title">
+    <%= link_to post.title, edit_blog_admin_post_path(post), :class => "title-link" %>
+    <p class="categories"><%#= post.categories.empty? ? "(none)" : post.categories.map(&:to_s).join(", ") %></p>
+    <p class="post-controls">
+      <%#= link_to "View", post.permalink, :target => :_blank %> |
+      <%= link_to "Edit", edit_blog_admin_post_path(post) %> |
+      <%#= link_to "Delete", confirm_delete_blog_post_path(post), :rel => :facebox %>
+    </p>
+  </td>
+  <td class="author"><%= post.author.name %></td>
+  <td class="tags"><%#= post.tags.empty? ? "(no tags)" : post.tags.join(", ") %></td>
+  <td class="comments"><%#= post.comments_count || 0 %></td>
+  <td class="date"><%= (post.published_at || post.updated_at).to_date.to_formatted_s(:rfc822) %><br /><small><%= post.published? ? "(Published)" : "(Edited)" %></small></td>
+</tr>
+

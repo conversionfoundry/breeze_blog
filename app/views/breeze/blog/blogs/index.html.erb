@@ -1,15 +1,22 @@
 <% content_for :title, "Blog" %>
 
-<%= pane_layout do |main| %>
-  <% main.header do %>
+<%#= pane_layout do |main| %>
+<%= tabbed_layout do |tabs| %>
+  <% tabs.header do %>
     <h2></h2>
   <% end %>
-  <% main.inner do %>
-	  <%= scrollable_layout :id => :posts do %>
-	    <h1>Posts</h1>
-	    <%= render :partial => "post", :collection => @posts %>
-	  <% end %>
-  <% end %>
+  <% tabs.published :title => "Published" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.published, :view => :published } %>
+  <% end -%>
+  <% tabs.pending :title => "Pending" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.pending, :view => :pending } %>
+  <% end -%>
+  <% tabs.drafts :title => "Drafts" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.draft, :view => :draft } %>
+  <% end -%>
 <% end %>
 
 <% content_for :left do %>
@@ -22,8 +29,4 @@
       <%= link_to "New blog post", new_blog_admin_post_path, :class => "large new blog_post button" %>
     <% end %>
   <% end %>
-<% end %>
-
-<% content_for :head do %>
-  <%= stylesheet_link_tag "/breeze/stylesheets/blog.css" %>
 <% end %>
