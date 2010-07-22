@@ -11,10 +11,11 @@ module Breeze
       end
       
       def blog_menu
+        drafts_count = blog.posts.draft.count
         pending_comments_count = blog.comments.pending.count
         content_tag :ul, [
           blog_menu_item("Blog overview", "/admin/blog"),
-          blog_menu_item("Posts", "/admin/blog/posts"),
+          blog_menu_item("Posts #{"<small>#{drafts_count}</small>" unless drafts_count.zero?}", "/admin/blog/posts"),
           blog_menu_item("Comments #{"<small>#{pending_comments_count}</small>" unless pending_comments_count.zero?}", "/admin/blog/comments"),
           blog_menu_item("Settings", "/admin/blog/settings"),
           blog_menu_item("View blog", blog.permalink, :target => :_blank)
