@@ -24,6 +24,7 @@
 }
 
 #left .actions li a {
+  position: relative;
 	display: block;
 	background: #ccc;
 	margin: 0px 0px 8px;
@@ -39,14 +40,6 @@
 	font-size: 125%;
 }
 
-#left .actions li a small {
-	display: block;
-	font-size: 85%;
-	color: #666;
-	text-transform: uppercase;
-	letter-spacing: 0.12em;
-}
-
 #left .actions li a:hover {
 	background: #bbb;
 }
@@ -57,6 +50,24 @@
 	-webkit-border-top-right-radius: 0px;
 	-webkit-border-bottom-right-radius: 0px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+}
+
+#left .actions li small {
+  position: absolute;
+  right: 0.5em;
+  top: 50%;
+  min-width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  margin: -0.75em 0em 0em;
+  text-align: center;
+  vertical-align: middle;
+  background: #ec008c;
+  color: white;
+  font-size: 1.0em;
+  -webkit-border-radius: 0.75em;
+  -moz-border-radius: 0.75em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px -1px 1px, rgba(255, 255, 255, 0.5) 0px 1px 1px;
 }
 
 /* @end */
