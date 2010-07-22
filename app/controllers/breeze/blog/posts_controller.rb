@@ -1,8 +1,7 @@
 module Breeze
   module Blog
-    class PostsController < Breeze::Admin::AdminController
+    class PostsController < Breeze::Blog::Controller
       unloadable
-      helper Breeze::Blog::BlogAdminHelper
 
       before_filter :check_for_blogs
       
@@ -30,24 +29,6 @@ module Breeze
       
       def destroy
       end
-
-    protected
-    
-    # TODO: Methods getting blog are duplicated from BlogsController. Refactor to module. CB 21 July 2010.
-      def check_for_blogs
-        unless blog
-          render :action => "no_blog"
-        end
-      end
-
-      def blog
-        @blog ||= if session[:blog_id]
-          Blog.find session[:blog_id]
-        else
-          Blog.first
-        end
-      end
-      helper_method :blog
     end
   end
 end
