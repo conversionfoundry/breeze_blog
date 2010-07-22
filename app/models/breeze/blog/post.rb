@@ -34,7 +34,7 @@ module Breeze
       
       scope :published, lambda { where(:published_at.lt => Time.now.utc) }
       scope :pending,   lambda { where(:published_at.gt => Time.now.utc) }
-      scope :draft,     lambda { where(:published_at => nil) }
+      scope :draft,     where(:published_at => nil)
       
       def summary
         # TODO: automatically create summaries, but allow manual customisation.
