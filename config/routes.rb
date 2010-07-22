@@ -9,6 +9,12 @@ Rails.application.routes.draw do |map|
     end
 
     resources :posts
-    resources :comments
+    put "comments(.:format)" => "comments#mass_update"
+    resources :comments do
+      member do
+        put :approve
+        put :spam
+      end
+    end
   end
 end

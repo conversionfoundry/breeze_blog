@@ -81,13 +81,12 @@
 table.fancy {
 	border-collapse: collapse;
 	border-spacing: 0px;
-	margin: 0;
 	width: 100%;
 }
 
 table.fancy thead th {
-    /*background: url(../images/tables/header.png) no-repeat 50% 0px;*/
-    border-bottom: 1px solid #ccc;
+  background: #999;
+  border-bottom: 1px solid #999;
 	height: 24px;
 	line-height: 24px;
 	vertical-align: middle;
@@ -95,27 +94,41 @@ table.fancy thead th {
 	text-align: left;
 }
 
-table.fancy thead th.first {
+table.fancy thead th:first-child {
 	background-position: 0px 0px;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topleft: 4px;
 }
 
-table.fancy thead th.last {
+table.fancy thead th:last-child {
 	background-position: 100% 0px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
 }
 
 table.fancy tbody td {
-	border-bottom: 1px solid #a9b4b9;
+	border-bottom: 1px solid #999;
 	padding: 0px 8px;
 	vertical-align: top;
 }
 
 table.fancy tfoot td {
 	background: #ddd;
-	padding: 4px 8px;
+	padding: 8px;
+}
+
+table.fancy tfoot td:first-child {
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomleft: 4px;
+}
+
+table.fancy tfoot td:last-child {
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
 }
 
 table.fancy tfoot .pagination a, table.fancy tfoot .pagination span {
-	padding: .2em .3em;
+	padding: 0em .3em;
 }
 
 table.fancy tfoot .pagination span.disabled {
@@ -132,6 +145,10 @@ table.fancy tfoot .pagination span.current {
 table.fancy tfoot .pagination a {
 	text-decoration: none;
 	color: #333;
+}
+
+table.fancy tfoot .pagination .previous_page {
+  margin-left: 0px;
 }
 
 table.fancy tfoot .pagination a:hover, table.fancy tfoot .pagination a:focus {
@@ -175,3 +192,59 @@ table.posts .post-controls {
 	top: 4px;
 }
 /* @end */
+
+/* Comments {{{ */
+
+.comments-container {
+  margin: 16px;
+}
+
+table.comments tr.comment td {
+  padding: 4px 8px;
+}
+
+table.comments tr.comment .comment-context {
+  color: #666;
+  border-bottom: 1px dotted #999;
+  padding-bottom: 0.5em;
+}
+
+table.comments tr.comment .comment-actions {
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease-in;
+}
+
+table.comments tr.comment:hover .comment-actions {
+  opacity: 1.0;
+}
+
+table.comments img.gravatar {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+}
+
+.comment-drag-helper {
+  height: 32px;
+  min-width: 16px;
+  padding: 0px 8px;
+  line-height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  background: #ec008c;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+}
+
+#main-tabs-tabs li a.drop-hover {
+  color: black !important;
+  text-shadow: #ec008c 0px 0px 4px;
+  cursor: pointer;
+}
+
+/*}}}*/
+

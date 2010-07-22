@@ -1,0 +1,77 @@
+<% content_for :title, "Blog comments" %>
+
+<%= tabbed_layout do |tabs| %>
+  <% tabs.published :title => "Published" do -%>
+    <%= render "comments", :comments => blog.comments.published.paginate %>
+  <% end -%>
+  <% tabs.pending :title => "Pending" do -%>
+    <%= render "comments", :comments => blog.comments.pending.paginate %>
+  <% end -%>
+  <% tabs.spam :title => "Spam" do -%>
+    <%= render "comments", :comments => blog.comments.spam.paginate %>
+  <% end -%>
+<% end %>
+
+<% content_for :left do %>
+  <%= render :partial => "breeze/blog/blogs/left" %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  function makeDraggable(comments) {
+    $(comments).draggable({
+      appendTo: '#main',
+      cursor: 'default',
+      cursorAt: { left: -8, top: -8 },
+      helper: function() {
+        return $('<div class="comment-drag-helper">(Comment)</div>');
+      },
+      start: function(event, ui) {
+        $(':checkbox', this).attr('checked', true);
+        $(ui.helper).html($(this).closest('tbody').find(':checked').length);
+      }
+    });
+  }
+
+  $(function() {
+    makeDraggable('.comments-container .comment');
+
+    $('.comments-container tfoot .pagination a').live('click', function() {
+      var container = $(this).closest('.container');
+      var tab = $(this).closest('.tab-pane').attr('id').replace(/^tab_/, '');
+      $.get(this.href + '&tab=' + tab, function(data) {
+        container.replaceWith(data);
+        makeDraggable('.comments-container:visible .comment');
+      });
+      return false;
+    });
+    
+    $('#main-tabs-tabs li a').droppable({
+      accept: '.comment',
+      hoverClass: 'drop-hover',
+      tolerance: 'pointer',
+      drop: function(e, ui) {
+        var comment_ids = [];
+        var comments = $(ui.draggable).closest('table').find('tbody :checked').closest('.comment');
+        comments.each(function() {
+          comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]='));
+        });
+        comments.fadeOut(function() { $(this).remove(); });
+        $.ajax({
+          url: '/admin/blog/comments.js',
+          type: 'post',
+          dataType: 'script',
+          data: '_method=put&' + comment_ids.join('&') + '&comment[status]=' + $(this).attr('href').replace(/^.*\#tab_/, '')
+        });
+      }
+    });
+    
+    $('.comments-container thead :checkbox').live('change', function() {
+      var comments = $('tbody :checkbox', $(this).closest('table'));
+      if (this.checked) {
+        comments.attr('checked', true);
+      } else {
+        comments.removeAttr('checked');
+      }
+    });
+  });
+</script>

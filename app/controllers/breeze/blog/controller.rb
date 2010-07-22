@@ -2,6 +2,7 @@ module Breeze
   module Blog
     class Controller < Breeze::Admin::AdminController
       helper Breeze::Blog::BlogAdminHelper
+      helper Breeze::Blog::BlogHelper
       before_filter :check_for_blogs, :except => [ :setup_default ]
 
     protected

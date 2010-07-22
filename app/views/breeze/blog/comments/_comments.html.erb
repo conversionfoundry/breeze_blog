@@ -1,0 +1,24 @@
+<div class="comments-container container">
+  <%= form_tag admin_blog_comments_path, :method => :put do -%>
+    <table class="fancy comments">
+      <thead>
+        <tr>
+          <th class="first" style="width: 2em;"><input class="checkbox select-all" type="checkbox" /></th>
+          <th style="width: 64px;">Avatar</th>
+          <th style="">Comment</th>
+          <th class="last" style="width: 15%;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if comments.any? -%>
+          <%= render :partial => "comment", :collection => comments %>
+        <% else -%>
+          <tr><td class="empty" colspan="4">There are no comments to show here.</td></tr>
+        <% end -%>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="4"><%= will_paginate comments %></td></tr>
+      </tfoot>
+    </table>
+  <% end -%>
+</div>

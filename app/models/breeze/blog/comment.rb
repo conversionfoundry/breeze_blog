@@ -21,8 +21,11 @@ module Breeze
       validates_presence_of :name, :body
       validates_format_of :email, :with => Devise.email_regexp, :message => "must be a valid email address"
       
-      scope :root, where(:parent_id => nil)
+      before_destroy :destroy_children
       
+      scope :root, where(:parent_id => nil)
+      scope :replies_to, lambda { |comment| where(:parent_id => comment.id) }
+
       def root?
         parent_id.nil?
       end
@@ -78,6 +81,20 @@ module Breeze
         end
       end
       memoize :linked_body
+      
+      def gravatar(options = {})
+        options[:size] ||= 64
+        "http#{"s" if options[:secure]}://www.gravatar.com/avatar/#{gravatar_hash}?" + options.map { |k, v| "#{k.to_s[0,1]}=#{CGI.escape(v.to_s)}" }.join("&")
+      end
+      
+    protected
+      def gravatar_hash
+        @gravatar_hash ||= Digest::MD5.hexdigest email.downcase.strip
+      end
+      
+      def destroy_children
+        blog.comments.replies_to(self).map(&:destroy)
+      end
     end
   end
 end
