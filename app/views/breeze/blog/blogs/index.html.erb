@@ -1,32 +1,17 @@
 <% content_for :title, "Blog" %>
 
-<%#= pane_layout do |main| %>
-<%= tabbed_layout do |tabs| %>
-  <% tabs.header do %>
-    <h2></h2>
-  <% end %>
-  <% tabs.published :title => "Published" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.published, :view => :published } %>
+<% pane_layout do |panes| -%>
+  <% panes.header do -%>
+
   <% end -%>
-  <% tabs.pending :title => "Pending" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.pending, :view => :pending } %>
+  <% panes.inner do -%>
+
   <% end -%>
-  <% tabs.drafts :title => "Drafts" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.draft, :view => :draft } %>
+  <% panes.footer do -%>
+    
   <% end -%>
-<% end %>
+<% end -%>
 
 <% content_for :left do %>
   <%= render :partial => "left" %>
-<% end %>
-
-<% content_for :right do %>
-  <%= pane_layout do |right| %>
-    <% right.header do %>
-      <%= link_to "New blog post", new_blog_admin_post_path, :class => "large new blog_post button" %>
-    <% end %>
-  <% end %>
 <% end %>

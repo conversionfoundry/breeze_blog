@@ -2,9 +2,9 @@
   <td><%= check_box_tag "post_ids[]", post.id %></td>
   <td class="title">
     <%= link_to post.title, edit_blog_admin_post_path(post), :class => "title-link" %>
-    <p class="categories"><%#= post.categories.empty? ? "(none)" : post.categories.map(&:to_s).join(", ") %></p>
+    <p class="categories">[Placeholder]<%#= post.categories.empty? ? "(none)" : post.categories.map(&:to_s).join(", ") %></p>
     <p class="post-controls">
-      <%#= link_to "View", post.permalink, :target => :_blank %> |
+      <%= link_to "View", post.permalink, :target => :_blank %> |
       <%= link_to "Edit", edit_blog_admin_post_path(post) %> |
       <%#= link_to "Delete", confirm_delete_blog_post_path(post), :rel => :facebox %>
     </p>

@@ -6,6 +6,10 @@ module Breeze
 
       before_filter :check_for_blogs
       
+      def index
+        @posts = blog.posts
+      end
+      
       def show
       end
       

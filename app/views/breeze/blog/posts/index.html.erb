@@ -1,0 +1,23 @@
+<% content_for :title, "Blog posts" %>
+
+<%= tabbed_layout do |tabs| %>
+	<% tabs.header do -%>
+	  <%= link_to "New blog post", new_blog_admin_post_path, :class => "large new blog_post button" %>
+	<% end -%>
+  <% tabs.published :title => "Published (#{@posts.published.size})" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 1), :view => :published } %>
+  <% end -%>
+  <% tabs.pending :title => "Pending (#{@posts.pending.size})" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page]), :view => :pending } %>
+  <% end -%>
+  <% tabs.drafts :title => "Drafts (#{@posts.draft.size})" do -%>
+    <%#= render :partial => "search" %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page]), :view => :draft } %>
+  <% end -%>
+<% end %>
+
+<% content_for :left do %>
+  <%= render :partial => "breeze/blog/blogs/left" %>
+<% end %>

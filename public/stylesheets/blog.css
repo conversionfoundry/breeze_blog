@@ -134,6 +134,11 @@ table.fancy tbody tr:hover td.empty {
 	background: none;
 }
 
+tbody tr:hover {
+	background-color: #fff;
+}
+
+
 table td.odd,  table th.odd,  table tr.odd td,  table tr.odd th {
 	background: none;
 }
@@ -142,6 +147,15 @@ table td.even, table th.even, table tr.even td, table tr.even th {
 	background-color: #ddd;
 }
 
-
+table.posts .post-controls {
+	font-size: 85%;
+	visibility: hidden;
+}
 
 /* @end */
+
+.header .button {
+	position: absolute;
+	right: 12px;
+	top: 4px;
+}
