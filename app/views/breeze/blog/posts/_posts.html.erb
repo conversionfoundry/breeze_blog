@@ -1,4 +1,4 @@
-<% form_tag blog_admin_posts_path do -%>
+<% form_tag admin_blog_posts_path do -%>
   <div id="<%= view %>-posts" class="posts-container container">
     <%= hidden_field_tag :mode, nil, :id => "#{view}_mode" %>
     <%= hidden_field_tag :view, view, :id => "#{view}_view" %>

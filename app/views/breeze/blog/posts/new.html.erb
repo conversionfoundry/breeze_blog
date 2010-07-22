@@ -2,7 +2,7 @@
 
 <%= pane_layout do |main| %>
 	<% main.inner do %>
-		<%= breeze_form_for @post, :as => :post, :url => blog_admin_posts_path do |form| %>
+		<%= breeze_form_for @post, :as => :post, :url => admin_blog_posts_path do |form| %>
 		  <%= scrollable_layout do %>
 		    <h1>New post</h1>
 			  <%= render "/breeze/admin/shared/error_messages", :target => @post, :object_name => :post %>

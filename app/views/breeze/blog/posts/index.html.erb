@@ -2,7 +2,7 @@
 
 <%= tabbed_layout do |tabs| %>
 	<% tabs.header do -%>
-	  <%= link_to "New blog post", new_blog_admin_post_path, :class => "large new blog_post button" %>
+	  <%= link_to "New blog post", new_admin_blog_post_path, :class => "large new blog_post button" %>
 	<% end -%>
   <% tabs.published :title => "Published (#{@posts.published.size})" do -%>
     <%#= render :partial => "search" %>
