@@ -5,7 +5,14 @@
 
   <% end -%>
   <% panes.inner do -%>
-
+    <h1>Your blog</h1>
+    
+    <% if @awaiting_moderation.any? %>
+      <p>You have <%= link_to pluralize(@awaiting_moderation.count, "comment"), admin_blog_comments_path(:anchor => "tab_pending") %> awaiting moderation.</p>
+    <% end %>
+    <% if @awaiting_reply.any? %>
+      <p>You have <%= link_to pluralize(@awaiting_reply.count, "comment"), admin_blog_comments_path(:anchor => "tab_awaiting_reply") %> awaiting reply. Replying to comments encourages discussion by letting your visitors know you read and value their contributions.</p>
+    <% end %>
   <% end -%>
   <% panes.footer do -%>
     

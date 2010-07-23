@@ -1,0 +1,12 @@
+<%= breeze_form_for @comment, :as => :comment, :url => admin_blog_comments_path(:format => :js), :remote => true do |form| %>
+  <%= form.fieldset :class => "author-details" do %>
+    <%= form.text_field :name %>
+    <%= form.text_field :email, :disabled => true %>
+    <%= form.hidden_field :author_id %>
+    <%= form.hidden_field :parent_id %>
+    <li class="gravatar-li"><%= image_tag form.object.gravatar, :alt => form.object.name, :class => :gravatar %></li>
+  <% end %>
+  <%= form.fieldset :class => "comment-body" do %>
+    <%= form.text_area :body, :rows => 8 %>
+  <% end %>
+<% end %>

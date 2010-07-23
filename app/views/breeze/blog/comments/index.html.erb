@@ -1,17 +1,25 @@
 <% content_for :title, "Blog comments" %>
 
 <%= tabbed_layout do |tabs| %>
-  <% tabs.published :title => "Published" do -%>
-    <h2>Published comments</h2>
-    <%= render "comments", :comments => blog.comments.published.paginate %>
-  <% end -%>
   <% tabs.pending :title => "Pending" do -%>
     <h2>Pending comments</h2>
-    <%= render "comments", :comments => blog.comments.pending.paginate %>
+    <p>These comments are awaiting moderation from you or your team.</p>
+    <%= render "comments", :comments => @comments.pending.paginate %>
+  <% end -%>
+  <% tabs.published :title => "Published" do -%>
+    <h2>Published comments</h2>
+    <p>These comments have been approved for display on your website.</p>
+    <%= render "comments", :comments => @comments.published.paginate %>
   <% end -%>
   <% tabs.spam :title => "Spam" do -%>
     <h2>Spam comments</h2>
-    <%= render "comments", :comments => blog.comments.spam.paginate %>
+    <p>These comments have been marked as spam and will not appear on your website.</p>
+    <%= render "comments", :comments => @comments.spam.paginate %>
+  <% end -%>
+  <% tabs.awaiting_reply :title => "Awaiting reply" do -%>
+    <h2>Comments awaiting reply</h2>
+    <p>These are published comments to which nobody from your organisation has posted a reply.</p>
+    <%= render "comments", :comments => @comments.awaiting_reply.paginate %>
   <% end -%>
 <% end %>
 
@@ -25,6 +33,7 @@
       appendTo: '#main',
       cursor: 'default',
       cursorAt: { left: -8, top: -8 },
+      cancel: 'input, option, a',
       helper: function() {
         return $('<div class="comment-drag-helper">(Comment)</div>');
       },
@@ -98,6 +107,30 @@
       });
       $(this).closest('.container').find('thead :checked').removeAttr('checked');
       $(this).closest('.with-selected').hide();
+      return false;
+    });
+    
+    $('.comments .comment .reply').live('click', function() {
+      $.get(this.href, function(data) {
+        $('<div></div>').html(data).dialog({
+          title: 'Reply to comment',
+          modal: true,
+          width: 512,
+          resizable: false,
+          open: function() {
+            $('textarea', this)[0].focus();
+          },
+          close: function() {
+            $(this).remove();
+          },
+          buttons: {
+            Cancel: function() { $(this).dialog('close'); },
+            OK: function() {
+              $('form', this).submit();
+            }
+          }
+        });
+      });
       return false;
     });
   });

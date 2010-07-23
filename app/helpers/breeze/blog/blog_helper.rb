@@ -15,7 +15,7 @@ module Breeze
       def replies_to(comment, comments)
         replies = comments.select { |c| c.parent_id == comment.id }
         unless replies.empty?
-          content_tag :div, render(:partial => "comment", :collection => replies, :locals => { :comments => comments }), :class => "comment-replies"
+          content_tag :div, render(:partial => "/partials/blog/comment", :collection => replies, :locals => { :comments => comments }), :class => "comment-replies"
         end
       end
       

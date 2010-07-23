@@ -222,6 +222,10 @@ table.posts .post-controls {
   margin: 16px 16px 0px;
 }
 
+.tab-pane>p {
+  margin: 8px 16px 0px;
+}
+
 .comments-container {
   margin: 16px;
   position: relative;
@@ -246,7 +250,8 @@ table.comments tr.comment:hover .comment-actions {
   opacity: 1.0;
 }
 
-table.comments img.gravatar {
+table.comments img.gravatar,
+#comment_new img.gravatar {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
@@ -276,6 +281,44 @@ table.comments img.gravatar {
 
 #tab_published .with-selected .approve,
 #tab_spam .with-selected .spam { display: none; }
+
+#comment_new fieldset.author-details {
+  position: relative;
+  margin-right: 80px;
+  padding: 0px;
+}
+
+#comment_new fieldset.author-details label {
+  width: 20%;
+}
+
+#comment_new fieldset.author-details .inline-errors {
+  margin-left: 20%;
+}
+
+#comment_new fieldset.author-details li.gravatar-li {
+  position: absolute;
+  top: 0px;
+  right: -80px;
+}
+
+#comment_new fieldset.comment-body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#comment_new fieldset.comment-body label {
+  display: none;
+}
+
+#comment_new fieldset.comment-body textarea {
+  width: 99%;
+}
+
+#comment_new fieldset.comment-body .inline-errors {
+  margin-left: 0em;
+}
+
 
 /*}}}*/
 

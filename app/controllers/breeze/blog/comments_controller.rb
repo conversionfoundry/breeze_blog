@@ -5,10 +5,21 @@ module Breeze
       
       def index
         if request.xhr?
-          Rails.logger.info "XHR".green
-          @comments = blog.comments.send(params[:tab]).paginate(:page => params[:page] || 1)
+          @comments = blog.comments.send(params[:tab]).descending(:created_at).paginate(:page => params[:page] || 1)
           render :partial => "comments", :locals => { :comments => @comments }, :layout => false
+        else
+          @comments = blog.comments.descending(:created_at)
         end
+      end
+      
+      def new
+        @comment = new_comment
+      end
+      
+      def create
+        @comment = new_comment
+        @comment.attributes = params[:comment]
+        @comment.save
       end
       
       def approve
@@ -40,6 +51,14 @@ module Breeze
     protected
       def comment
         @comment ||= blog.comments.find params[:id]
+      end
+      
+      def new_comment
+        if params[:comment] && params[:comment][:parent_id]
+          Comment.reply_to blog.comments.find params[:comment][:parent_id], params[:comment]
+        else
+          blog.comments.build(params[:comment])
+        end.with_author(current_user)
       end
     end
   end
