@@ -6,6 +6,7 @@ module Breeze
       field :posts_per_page, :type => Integer, :default => 5
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
+      embeds_one :comment_strategy, :class_name => "Breeze::Blog::CommentStrategy"
       
       before_create :create_default_views
       

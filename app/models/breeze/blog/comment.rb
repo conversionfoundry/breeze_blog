@@ -31,6 +31,9 @@ module Breeze
       before_destroy :decrement_post_comments_count, :if => :published?
       before_save :increment_parent_replies_count
       before_destroy :decrement_parent_replies_count
+      after_create do |comment|
+        Breeze.queue comment, :submit_for_approval
+      end
       
       scope :root, where(:parent_id => nil)
       scope :replies_to, lambda { |comment| where(:parent_id => comment.id) }
@@ -150,6 +153,10 @@ module Breeze
       
       def destroy_children
         blog.comments.replies_to(self).map(&:destroy)
+      end
+      
+      def submit_for_approval
+        blog.comment_strategy.submit self
       end
     end
   end
