@@ -34,7 +34,7 @@
           <%= form.fields_for :spam_strategy do |spam| %>
             <%= spam.select :_type, Breeze::Blog::Spam::Strategy.strategies.map { |s| [ s.label, s.name ] }, :label => "Spam filtering" %>
             <% Breeze::Blog::Spam::Strategy.strategies.each do |strategy| %>
-              <%= content_tag :div, :class => "spam-strategy", :id => "spam_strategy_#{strategy.name.demodulize.underscore}", :style => "display: #{spam.object.is_a?(strategy) ? :block : :none}", :"data-class" => strategy.to_s do %>
+              <%= content_tag :li, :class => "spam-strategy", :id => "spam_strategy_#{strategy.name.demodulize.underscore}", :style => "display: #{spam.object.is_a?(strategy) ? :block : :none}", :"data-class" => strategy.to_s do %>
                 <%= render strategy.partial, :spam => spam %>
               <% end %>
             <% end %>

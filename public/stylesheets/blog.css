@@ -1,4 +1,4 @@
-/* @group Left Panel */
+/* Left Panel {{{ */
 
 #left #blog-switcher {
 	padding: 8px;
@@ -74,9 +74,9 @@
   margin-right: 8px;
 }
 
-/* @end */
+/* }}} */
 
-/* @group Tables */
+/* Tables {{{ */
 
 table.fancy {
 	border-collapse: collapse;
@@ -207,14 +207,30 @@ table.posts .post-controls {
   border-bottom: 8px solid transparent;
 }
 
-/* @end */
+/* }}} */
 
-.header .button {
+#main .header .button {
 	position: absolute;
-	right: 12px;
-	top: 4px;
+	right: 8px;
+	top: 3px;
+  width: 208px;
+  text-align: center;
+  padding: 8px 0px 9px;
 }
-/* @end */
+
+/* Settings {{{ */
+  
+.breeze-form fieldset > ol > li.spam-strategy fieldset {
+  margin: 0px 0px 8px;
+  padding: 0px;
+}
+
+.breeze-form fieldset > ol > li.spam-strategy fieldset ol {
+  padding: 0px;
+  width: 100%;
+}
+
+/*}}}*/
 
 /* Comments {{{ */
 
