@@ -156,7 +156,7 @@ module Breeze
       end
       
       def submit_for_approval
-        blog.comment_strategy.submit self
+        blog.spam_strategy.submit self
       end
     end
   end
