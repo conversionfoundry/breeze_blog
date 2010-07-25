@@ -5,6 +5,8 @@ module Breeze
       
       include Mongoid::Document
       include Mongoid::Timestamps
+      identity :type => String
+
       include Breeze::Content::Mixins::Permalinks
       include Breeze::Content::Mixins::Markdown
       
