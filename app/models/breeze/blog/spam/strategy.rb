@@ -9,6 +9,30 @@ module Breeze
       
         def submit(comment)
         end
+        
+        def self.partial
+          "/breeze/blog/blogs/spam/" + name.demodulize.underscore
+        end
+        
+        def partial
+          self.class.partial
+        end
+        
+        def self.label
+          name.demodulize.sub(/Strategy$/, "").underscore.humanize
+        end
+        
+        def self.strategies
+          @strategies ||= returning([]) do |classes|
+            Dir[File.join(File.dirname(__FILE__), "*.rb")].each do |f|
+              require f
+            end
+            subclasses.each do |k|
+              classes << k
+            end
+          end
+          @strategies.map &:constantize
+        end
       end
     end
   end
