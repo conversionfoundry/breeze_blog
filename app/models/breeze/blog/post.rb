@@ -24,6 +24,7 @@ module Breeze
         end
       end
       has_many_related :categories, :class_name => "Breeze::Blog::Category", :stored_as => :array
+      field :tags, :type => Array, :default => lambda { [] }
       
       field :title
       field :slug
@@ -76,6 +77,12 @@ module Breeze
 
       def category_ids=(values)
         write_attribute :category_ids, Array(values).reject(&:blank?)
+      end
+      
+      def tags=(values)
+        write_attribute :tags, (Array(values).map { |tag|
+          tag.split(/[ \n\t]*,[ \n\t]*/).map { |t| t.strip }
+        }.flatten.reject(&:blank?).sort.uniq)
       end
       
     protected

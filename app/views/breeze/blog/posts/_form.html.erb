@@ -23,6 +23,10 @@
 			      <li><%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), :id => "post_category_ids_#{category.id}" %> <%= label_tag "post_category_ids_#{category.id}", category %></li>
 			    <% end %>
 			  <% end %>
+			  
+			  <%= form.fieldset :legend => "Tags" do %>
+			    <%= form.text_area :tags, :value => form.object.tags.join(", "), :rows => 3, :cols => 16, :hint => "Separate tags with commas" %>
+			  <% end %>
 		  <% end %>
 		<% end %>
 	<% end %>

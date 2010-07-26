@@ -10,7 +10,7 @@
     </p>
   </td>
   <td class="author"><%= post.author.name %></td>
-  <td class="tags"><%#= post.tags.empty? ? "(no tags)" : post.tags.join(", ") %></td>
+  <td class="tags"><%= post.tags.empty? ? "(no tags)" : post.tags.join(", ") %></td>
   <td class="comments"><%= link_to post.comments_count || 0, post.permalink + "#comments", :target => :_blank %></td>
   <td class="date"><%= (post.published_at || post.updated_at).to_date.to_formatted_s(:rfc822) %><br /><small><%= post.published? ? "(Published)" : "(Edited)" %></small></td>
 <% end -%>
