@@ -18,5 +18,10 @@ Rails.application.routes.draw do |map|
         put :spam
       end
     end
+    resources :categories do
+      collection do
+        put :reorder
+      end
+    end    
   end
 end

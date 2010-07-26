@@ -1,0 +1,7 @@
+<%= breeze_form_for @category, :as => :category, :url => admin_blog_category_path(@category, :format => :js), :remote => true do |form| %>
+  <%= form.error_messages %>
+  <%= form.fieldset do %>
+    <%= form.text_field :name %>
+    <%= form.text_field :slug %>
+  <% end %>
+<% end %>

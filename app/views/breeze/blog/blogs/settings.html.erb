@@ -15,9 +15,9 @@
         
         <% end %>
       <% end %>
-      <div class="fake-right-sidebar">
+      <%= fake_right_sidebar do %>
         <%= form.submit "Save settings", :class => "large green save button" %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
   <% tabs.comments :title => "Comments" do %>
@@ -41,14 +41,23 @@
           <% end %>
         <% end %>
       <% end %>
-      <div class="fake-right-sidebar">
+      <%= fake_right_sidebar do %>
         <%= form.submit "Save settings", :class => "large green save button" %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
   <% tabs.categories :title => "Categories" do %>
     <%= scrollable_layout do %>
       <h1>Categories</h1>
+      <ul id="blog_categories" class="categories">
+        <%= render :partial => "/breeze/blog/categories/category", :collection => blog.categories.ascending(:position) %>
+      </ul>
+    <% end %>
+    
+    <%= fake_right_sidebar do %>
+      <div id="new-category">
+        <%= render "/breeze/blog/categories/new" %>
+      </div>
     <% end %>
   <% end %>
   <% tabs.rss :title => "RSS" do %>
@@ -59,9 +68,9 @@
         
         <% end %>
       <% end %>
-      <div class="fake-right-sidebar">
+      <%= fake_right_sidebar do %>
         <%= form.submit "Save settings", :class => "large green save button" %>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
@@ -87,6 +96,33 @@
     $('#blog_spam_strategy_attributes__type').change(function() {
       $('.spam-strategy').hide().find(':input').attr('disabled', true);
       $('.spam-strategy[data-class=' + $(this).val() + ']').show().find(':input').removeAttr('disabled');
+    });
+    
+    $('#blog_categories').sortable({
+      axis: 'y',
+      update: function(e, ui) {
+        $.ajax({
+          url: '/admin/blog/categories/reorder.js',
+          type: 'post',
+          dataType: 'script',
+          data: '_method=put&' + $(this).sortable('serialize')
+        });
+      }
+    });
+    
+    $('#blog_categories a.edit').live('click', function() {
+      $.get(this.href, function(data) {
+        $('<div></div>').html(data).dialog({
+          title: 'Edit category',
+          modal: true,
+          buttons: {
+            Cancel: function() { $(this).dialog('close'); },
+            Ok: function() { $('form', this).submit(); }
+          },
+          close: function() { $(this).remove(); }
+        });
+      });
+      return false;
     });
   });
 </script>

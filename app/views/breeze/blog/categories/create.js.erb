@@ -1,0 +1,8 @@
+<% if @category.errors.empty? %>
+  $('#blog_categories').append('<%= escape_javascript render("/breeze/blog/categories/category", :category => @category) %>');
+  <% @category = nil %>
+  $('#new-category').html('<%= escape_javascript render("/breeze/blog/categories/new") %>');
+  $('#category_name')[0].focus();
+<% else %>
+  $('#new-category').html('<%= escape_javascript render("/breeze/blog/categories/new") %>');
+<% end %>

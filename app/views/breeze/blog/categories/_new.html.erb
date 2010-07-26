@@ -1,0 +1,7 @@
+<%= breeze_form_for @category || Breeze::Blog::Category.new, :as => :category, :url => admin_blog_categories_path(:format => :js), :remote => true do |form| %>
+  <%= form.fieldset :legend => "Add a category" do %>
+    <%= form.text_field :name %>
+    <%= form.text_field :slug %>
+  <% end %>
+  <%= form.submit "Add category", :class => "green add button" %>
+<% end %>

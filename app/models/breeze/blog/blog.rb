@@ -7,6 +7,7 @@ module Breeze
       field :comment_moderation, :type => Boolean, :default => false
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
+      has_many_related :categories, :class_name => "Breeze::Blog::Category"
       embeds_one :spam_strategy, :class_name => "Breeze::Blog::Spam::Strategy"
       
       before_create :create_default_views

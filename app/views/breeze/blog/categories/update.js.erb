@@ -1,0 +1,6 @@
+<% if @category.errors.empty? %>
+  $('#category_<%= @category.id %>').replaceWith('<%= escape_javascript render("/breeze/blog/categories/category", :category => @category) %>');
+  $('#category_edit').closest('.ui-dialog-content').dialog('close');
+<% else %>
+  $('#category_edit').closest('.ui-dialog-content').html('<%= escape_javascript render(:template => "/breeze/blog/categories/edit") %>');
+<% end %>

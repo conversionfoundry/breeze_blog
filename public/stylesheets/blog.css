@@ -232,6 +232,71 @@ table.posts .post-controls {
 
 /*}}}*/
 
+/* Categories {{{ */
+
+#tab_categories #blog_categories {
+  margin: 0px 16px 8px;
+  padding: 0px;
+  max-width: 384px;
+}
+
+#blog_categories .category {
+  position: relative;
+	display: block;
+	background: #ccc;
+	margin: 0px 0px 8px;
+	padding: 0px 4px 0px 8px;
+	line-height: 32px;
+	vertical-align: middle;
+	color: #222;
+	cursor: move;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+#blog_categories .category a.view,
+#blog_categories .category a.edit,
+#blog_categories .category a.delete {
+  opacity: 0;
+  float: right;
+  margin: 4px 0px 0px 4px;
+  width: 24px;
+  height: 24px;
+  background-color: #ddd;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  text-indent: -20em;
+  overflow: hidden;
+  text-decoration: none;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-transition: opacity 0.12s ease-in, background-color 0.12s ease-in;
+}
+
+#blog_categories .category:hover a.view,
+#blog_categories .category:hover a.edit,
+#blog_categories .category:hover a.delete {
+  opacity: 1.0;
+}
+
+#blog_categories .category a.view   { background-image: url(/breeze/images/icons/category-view.png); }
+#blog_categories .category a.edit   { background-image: url(/breeze/images/icons/category-edit.png); }
+#blog_categories .category a.delete { background-image: url(/breeze/images/icons/category-delete.png); }
+
+#blog_categories .category a.view:hover,
+#blog_categories .category a.edit:hover,
+#blog_categories .category a.delete:hover { background-color: white; }
+
+#blog_categories .category .category-name {
+  color: #222;
+  text-decoration: none;
+  font-size: 125%;
+  font-weight: bold;
+}
+
+/*}}}*/
+
+
 /* Comments {{{ */
 
 .tab-pane h2 {
