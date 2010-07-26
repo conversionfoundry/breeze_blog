@@ -6,6 +6,7 @@ Rails.application.routes.draw do |map|
       put :switch
       get :settings
       put :settings
+      get :new_spam_strategy
     end
 
     resources :posts

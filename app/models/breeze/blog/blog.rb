@@ -6,8 +6,10 @@ module Breeze
       field :posts_per_page, :type => Integer, :default => 5
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
+      embeds_one :spam_strategy, :class_name => "Breeze::Blog::Spam::Strategy"
       
       before_create :create_default_views
+      before_create :create_default_spam_filtering
       
       def view_for(controller, request)
         if controller.admin_signed_in? && request.params[:view]
@@ -56,6 +58,13 @@ module Breeze
         end
       end
       
+      def spam_strategy_attributes=(attrs)
+        if attrs[:_type]
+          klass = attrs[:_type].constantize
+          self.spam_strategy = klass.new(attrs.except(:id, :_type))
+        end
+      end
+      
     protected
       def create_default_views
         index_view
@@ -63,6 +72,10 @@ module Breeze
         category_view
         tag_view
         post_view
+      end
+      
+      def create_default_spam_filtering
+        self.spam_strategy = Breeze::Blog::Spam::NoStrategy.new
       end
     end
   end

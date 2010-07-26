@@ -74,7 +74,7 @@
   margin-right: 8px;
 }
 
-/*}}}*/
+/* }}} */
 
 /* Tables {{{ */
 
@@ -203,18 +203,30 @@ table td.even, table th.even, table tr.even td, table tr.even th {
   border-bottom: 8px solid transparent;
 }
 
-/* @end */
+/* }}} */
 
-.container {
-  padding-top: 32px;
-  position: relative;
+#main .header .button {
+	position: absolute;
+	right: 8px;
+	top: 3px;
+  width: 208px;
+  text-align: center;
+  padding: 8px 0px 9px;
 }
 
-.header .button {
-  position: absolute;
-  right: 12px;
-  top: 4px;
+/* Settings {{{ */
+  
+.breeze-form fieldset > ol > li.spam-strategy fieldset {
+  margin: 0px 0px 8px;
+  padding: 0px;
 }
+
+.breeze-form fieldset > ol > li.spam-strategy fieldset ol {
+  padding: 0px;
+  width: 100%;
+}
+
+/* }}} */
 
 /* Comments and Posts {{{ */
 	

@@ -18,6 +18,17 @@ module Breeze
         session[:blog_id] = params[:blog]
         redirect_to :action => "index"
       end
+      
+      def new_spam_strategy
+        
+      end
+      
+      def settings
+        if request.put?
+          blog.update_attributes params[:blog]
+          redirect_to admin_blog_settings_path
+        end
+      end
     end
   end
 end
