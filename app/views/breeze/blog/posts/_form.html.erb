@@ -8,7 +8,7 @@
 				  <%= form.text_field :title, :autocomplete => "off", :required => true %>
 				  <%= form.text_field :slug, :required => true, :hint => "Forms part of the permalink URL for this post" %>
 		      <%= form.select :author_id, Breeze::Admin::User.all.collect {|u| [ u.name, u._id ] }, :required => true %>
-					<%= form.text_area :body, :required => true, :rows => 15 %> 
+					<%= form.text_area :body, :required => true, :rows => 16, :class => "markup", :label => false %> 
 		    <% end %>
 		  <% end %>
 
@@ -44,6 +44,11 @@
   <% end %>
 <% end %>
 
+<% content_for :head do %>
+  <%= stylesheet_link_tag "/breeze/javascripts/marquess/marquess.css" %>
+  <%= javascript_include_tag "/breeze/javascripts/marquess/marquess.js", "/breeze/javascripts/blog.js" %>
+<% end %>
+
 <script type="text/javascript" charset="utf-8">
   var slug_updater = null;
 
@@ -54,8 +59,9 @@
 
     $('.post-categories label').live('click', function() {
     });
+    
+    $('textarea.markup').marquess();
   });
-  
   
   function auto_update_slug() {
     $('#post_slug').val($('#post_title').val().toLowerCase().replace(/[^a-z0-9\-]+/g, '-'));

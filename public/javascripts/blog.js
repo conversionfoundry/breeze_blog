@@ -1,32 +1,51 @@
 $(function() {
-  $('.container .table-tasks-popup a').click(function() {
-    var $container = $(this).closest('.container');
-    $container.find('input[name=mode]').val($(this).attr('rel')).closest('form').submit();
-    return false;
-  });
-
-  $('.container .table-tasks-popup').hide();
-  
-  $('.container table input.select-all').click(function() {
-    var select_all = this;
-    var $container = $(this).closest('.container');
-    $container.find('input[type=checkbox]').each(function() { this.checked = select_all.checked; });
-  });
-  
-  $('.container table input[type=checkbox]').click(function() {
-    var $container = $(this).closest('.container');
-    if (!$(this).hasClass('select-all') && !this.checked) {
-      var select_all = $container.find('input.select-all')[0];
-      if (select_all.checked && $container.find('tbody input[type=checkbox]').not(':checked').length > 0) {
-        select_all.checked = false;
+  $.ui.marquess.commands['link'].fn = function(editor) {
+    html = $('<div class="marquess-dialog breeze-form"><fieldset><ol class="form"><li class="text_field"><label for="marquess_link_text">Link text<abbr title="required">*</abbr></label><input class="text_field" name="link_text" id="marquess_link_text" /></li><li class="text_field"><label for="marquess_link_url">URL<abbr title="required">*</abbr></label><input class="text_field" name="link_url" id="marquess_link_url" /></li><ul id="marquess_link_select"></ul></div>');
+    $(html).dialog({
+      title:     'Insert a link',
+      width:     480,
+      modal:     true,
+      resizable: false,
+      buttons:   {
+        'OK': function() {
+          url = $('#marquess_link_url').val();
+          if (url[0] != '/' && !(/^https?:\/\//.test(url))) {
+            url = 'http://' + url;
+          }
+          editor.transform({
+            defaultText: 'link text',
+            text: $('#marquess_link_text').val(),
+            before: '[',
+            after: '](' + url + ')',
+            inline: true
+          });
+          $(this).dialog("close");
+        },
+        'Cancel': function() {
+          $(this).dialog("close");
+        }
+      },
+      close: function() {
+        $(this).remove();
       }
-    }
-    $container.find('.table-tasks-popup').fadeToggle($container.find('tbody input:checked').length > 0);
-  });
-  
-  $(document).bind('close.facebox', function() {
-    for (i in CKEDITOR.instances) {
-      CKEDITOR.remove(CKEDITOR.instances[i]);
-    };
-  });
+    });
+    $('#marquess_link_text').val(editor.editor.selectedText()).each(function() { this.focus(); });
+    $('#marquess_link_select').load('/admin/pages/list', function() {
+      $('a', this).click(function() {
+        if ($('#marquess_link_text').val() == '') { $('#marquess_link_text').val($(this).text()); }
+        $('#marquess_link_url').val($(this).attr('href'));
+        return false;
+      });
+      $('li.open, li.closed').click(function() {
+        $(this).toggleClass('open').toggleClass('closed');
+        return false;
+      }).filter('.open').click();
+    });
+    $('#marquess_link_text, #marquess_link_url').keypress(function(e) {
+      if (e.which == 13) {
+        $('button:contains(OK)', $(this).closest('.ui-dialog')).click();
+        return false;
+      }
+    });
+  };
 });
