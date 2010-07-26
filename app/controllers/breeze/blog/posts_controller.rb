@@ -45,6 +45,18 @@ module Breeze
         @post.try :destroy
       end
       
+      def mass_update
+        @posts = blog.posts.find params[:post_ids]
+        @posts.each do |post|
+          post.update_attributes params[:post]
+        end
+      end
+      
+      def mass_destroy
+        @posts = blog.posts.find params[:post_ids]
+        @posts.map &:destroy
+      end
+      
     end
   end
 end

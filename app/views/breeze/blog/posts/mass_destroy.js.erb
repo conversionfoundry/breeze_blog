@@ -1,0 +1,1 @@
+$('<%= @posts.map { |p| "#post_#{p.id}" }.join(", ") %>').fadeOut(function() { $(this).remove(); });

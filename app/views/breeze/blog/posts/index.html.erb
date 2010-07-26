@@ -76,5 +76,29 @@
         posts.removeAttr('checked');
       }
     });
+    
+    $('.posts-container :checkbox').live('change', function() {
+      var container = $(this).closest('.container');
+      $('.with-selected', container).toggle($('tbody :checked', container).length > 0);
+    });
+    
+    $('.posts-container .with-selected .button').live('click', function() {
+      var post_ids = [];
+      var posts = $(this).closest('.container').find('tbody :checked').closest('.post');
+      posts.each(function() { post_ids.push(this.id.replace(/^post_/, 'post_ids[]=')); });
+      var method = $(this).is('.delete') ? 'delete' : 'put';
+      var data = '_method=' + method + '&' + post_ids.join('&');
+      if ($(this).is('.publish')) { data += '&post[status]=publish'; }
+      if ($(this).is('.unpublish')) { data += '&post[status]=draft'; }
+      $.ajax({
+        url:'/admin/blog/posts.js',
+        type:'post',
+        dataType:'script',
+        data: data
+      });
+      $(this).closest('.container').find('thead :checked').removeAttr('checked');
+      $(this).closest('.with-selected').hide();
+      return false;
+    });
   });
 </script>

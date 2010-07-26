@@ -9,6 +9,8 @@ Rails.application.routes.draw do |map|
       get :new_spam_strategy
     end
 
+    put "posts(.:format)" => "posts#mass_update"
+    delete "posts(.:format)" => "posts#mass_destroy"
     resources :posts
     put "comments(.:format)" => "comments#mass_update"
     delete "comments(.:format)" => "comments#mass_destroy"
