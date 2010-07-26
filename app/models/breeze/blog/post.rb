@@ -23,6 +23,7 @@ module Breeze
           end
         end
       end
+      has_many_related :categories, :class_name => "Breeze::Blog::Category", :stored_as => :array
       
       field :title
       field :slug
@@ -71,6 +72,10 @@ module Breeze
         @commenters ||= comments.only(:name, :id, :created_at).descending(:created_at).all.map do |c|
           { :name => c.name, :id => c.id, :created_at => c.created_at }
         end
+      end
+
+      def category_ids=(values)
+        write_attribute :category_ids, Array(values).reject(&:blank?)
       end
       
     protected

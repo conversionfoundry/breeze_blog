@@ -7,7 +7,7 @@
 
   <body>
     <div id="container">
-      <h1>Blog category</h1>
+      <h1>Blog category: <%= category || "Not found" %></h1>
       <%= render "/partials/blog/posts", :posts => posts %>
     </div>
   </body>

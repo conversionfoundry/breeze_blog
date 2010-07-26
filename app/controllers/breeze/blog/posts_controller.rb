@@ -8,6 +8,9 @@ module Breeze
       end
       
       def show
+        if (@post = blog.posts.find params[:id])
+          redirect_to @post.permalink
+        end
       end
       
       def new
@@ -30,7 +33,8 @@ module Breeze
       def update
         @post = blog.posts.find params[:id]
         if @post.update_attributes(params[:post])
-          redirect_to admin_blog_posts_path
+          flash[:notice] = "Your post was saved. <a href=\"#{@post.permalink}\">View your changes</a>, <a href=\"admin_blog_posts_path\">return to the list of posts</a>, or close this message to continue editing."
+          redirect_to edit_admin_blog_post_path(@post)
         else
           render :action => "edit"
         end

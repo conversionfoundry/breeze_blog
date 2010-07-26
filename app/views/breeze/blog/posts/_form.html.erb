@@ -13,8 +13,16 @@
 		  <% end %>
 
 		  <%= fake_right_sidebar do %>
-		    <%= form.text_field :published_at %> 
+		    <%= form.text_field :published_at %>
 			  <%= submit_tag "Save", :class => "large green save button" %>
+			  <%= link_to "View", @post.permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
+			  
+			  <%= hidden_field_tag "post[category_ids][]", "" %>
+			  <%= form.fieldset :legend => "Categories", :class => "post-categories" do %>
+			    <% blog.categories.ascending(:position).each do |category| %>
+			      <li><%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), :id => "post_category_ids_#{category.id}" %> <%= label_tag "post_category_ids_#{category.id}", category %></li>
+			    <% end %>
+			  <% end %>
 		  <% end %>
 		<% end %>
 	<% end %>
@@ -37,9 +45,13 @@
 
   $(function() {
     slug_updater = window.setInterval('auto_update_slug()', 100);
+
+    $('#post_slug').keydown(function() { clearInterval(slug_updater); slug_updater = null; });
+
+    $('.post-categories label').live('click', function() {
+    });
   });
   
-  $('#post_slug').keydown(function() { clearInterval(slug_updater); slug_updater = null; });
   
   function auto_update_slug() {
     $('#post_slug').val($('#post_title').val().toLowerCase().replace(/[^a-z0-9\-]+/g, '-'));
