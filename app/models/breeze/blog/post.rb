@@ -33,6 +33,8 @@ module Breeze
       
       validates_presence_of :title, :slug, :body
       validates_presence_of :author_id, :message => "must be selected"
+
+      before_destroy :destroy_children
       
       scope :published, lambda { where(:published_at.lt => Time.now.utc) }
       scope :pending,   lambda { where(:published_at.gt => Time.now.utc) }
@@ -83,6 +85,11 @@ module Breeze
           "/unpublished"
         end
       end
+
+      def destroy_children
+        comments.map(&:destroy)
+      end
+      
     end
   end
 end

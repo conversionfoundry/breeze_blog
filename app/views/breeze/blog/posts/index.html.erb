@@ -5,19 +5,76 @@
 	  <%= link_to "New blog post", new_admin_blog_post_path, :class => "large new blog_post button" %>
 	<% end -%>
   <% tabs.published :title => "Published (#{@posts.published.size})" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 1), :view => :published } %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 10), :view => :published } %>
   <% end -%>
   <% tabs.pending :title => "Pending (#{@posts.pending.size})" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page]), :view => :pending } %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page], :per_page => 10), :view => :pending } %>
   <% end -%>
   <% tabs.drafts :title => "Drafts (#{@posts.draft.size})" do -%>
-    <%#= render :partial => "search" %>
-    <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page]), :view => :draft } %>
+    <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page], :per_page => 10), :view => :draft } %>
   <% end -%>
 <% end %>
 
 <% content_for :left do %>
   <%= render :partial => "breeze/blog/blogs/left" %>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  function makeDraggable(posts) {
+    $(posts).draggable({
+      appendTo: '#main',
+      cursor: 'default',
+      cursorAt: { left: -8, top: -8 },
+      helper: function() {
+        return $('<div class="post-drag-helper">(post)</div>');
+      },
+      start: function(event, ui) {
+        $(':checkbox', this).attr('checked', true);
+        $(ui.helper).html($(this).closest('tbody').find(':checked').length);
+      }
+    });
+  }
+
+  $(function() {
+    makeDraggable('.posts-container .post');
+
+    $('.posts-container tfoot .pagination a').live('click', function() {
+      var container = $(this).closest('.container');
+      var tab = $(this).closest('.tab-pane').attr('id').replace(/^tab_/, '');
+      $.get(this.href + '&tab=' + tab, function(data) {
+        container.replaceWith(data);
+        makeDraggable('.posts-container:visible .post');
+      });
+      return false;
+    });
+    
+    $('#main-tabs-tabs li a').droppable({
+      accept: '.post',
+      hoverClass: 'drop-hover',
+      tolerance: 'pointer',
+      drop: function(e, ui) {
+        var post_ids = [];
+        var posts = $(ui.draggable).closest('table').find('tbody :checked').closest('.post');
+        posts.each(function() {
+          post_ids.push(this.id.replace(/^post_/, 'post_ids[]='));
+        });
+        posts.fadeOut(function() { $(this).remove(); });
+        $.ajax({
+          url: '/admin/blog/posts.js',
+          type: 'post',
+          dataType: 'script',
+          data: '_method=put&' + post_ids.join('&') + '&post[status]=' + $(this).attr('href').replace(/^.*\#tab_/, '')
+        });
+      }
+    });
+    
+    $('.posts-container thead :checkbox').live('change', function() {
+      var posts = $('tbody :checkbox', $(this).closest('table'));
+      if (this.checked) {
+        posts.attr('checked', true);
+      } else {
+        posts.removeAttr('checked');
+      }
+    });
+  });
+</script>

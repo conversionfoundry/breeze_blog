@@ -1,0 +1,2 @@
+$('#post_<%= @post.id %>').fadeOut(function() { $(this).remove(); });
+$('#tab_<%= @post.status %> .posts-container').replaceWith('<%= escape_javascript render("posts", :posts => blog.posts.send(@post.status).paginate(:page => 1)) %>');

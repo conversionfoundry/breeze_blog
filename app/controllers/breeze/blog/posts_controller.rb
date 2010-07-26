@@ -2,11 +2,9 @@ module Breeze
   module Blog
     class PostsController < Breeze::Blog::Controller
       unloadable
-
-      before_filter :check_for_blogs
       
       def index
-        @posts = blog.posts
+        @posts = blog.posts # TODO Order result set
       end
       
       def show
@@ -26,13 +24,23 @@ module Breeze
       end
       
       def edit
+        @post = blog.posts.find params[:id]
       end
       
       def update
+        @post = blog.posts.find params[:id]
+        if @post.update_attributes(params[:post])
+          redirect_to admin_blog_posts_path
+        else
+          render :action => "edit"
+        end
       end
       
       def destroy
+        @post = blog.posts.find params[:id]
+        @post.try :destroy
       end
+      
     end
   end
 end

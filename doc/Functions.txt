@@ -1,6 +1,6 @@
 We create posts. We select categories for a post, which can be used for navigation. We create tags for a post. We save a post as a draft or publish it - if the latter, we select a publishing date.
 
-We set blog settings for presentation of dates and times, appearance and blog settings [What does that include?]. We set RSS settings for blogs.
+We set blog settings for presentation of dates and times, appearance and blog settings. We set RSS settings for blogs.
 
 We set comment settings for moderation, notifications, and spam control.
 
@@ -19,4 +19,5 @@ Edit blog settings
 Edit blog RSS settings
 Edit comment settings
 Create comments
+Vet comments
 Respond to comments
