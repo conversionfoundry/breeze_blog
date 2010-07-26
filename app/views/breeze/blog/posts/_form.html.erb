@@ -1,0 +1,47 @@
+<%= pane_layout do |main| %>
+	<% main.inner do %>
+		<%= breeze_form_for @post, :as => :post, :url => url do |form| %>
+		  <%= scrollable_layout do %>
+		    <h1><%= @post.new_record? ? 'New' : 'Edit' %> post</h1>
+			  <%= render "/breeze/admin/shared/error_messages", :target => @post, :object_name => :post %>
+		    <%= form.fieldset do %>
+				  <%= form.text_field :title, :autocomplete => "off", :required => true %>
+				  <%= form.text_field :slug, :required => true, :hint => "Forms part of the permalink URL for this post" %>
+		      <%= form.select :author_id, Breeze::Admin::User.all.collect {|u| [ u.name, u._id ] }, :required => true %>
+					<%= form.text_area :body, :required => true, :rows => 15 %> 
+		    <% end %>
+		  <% end %>
+
+		  <%= fake_right_sidebar do %>
+		    <%= form.text_field :published_at %> 
+			  <%= submit_tag "Save", :class => "large green save button" %>
+		  <% end %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<% content_for :left do %>
+  <%= render :partial => "/breeze/blog/blogs/left" %>
+<% end %>
+
+<% content_for :right do %>
+  <%= pane_layout do |right| %>
+    <% right.header do %>
+
+    <% end %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  var slug_updater = null;
+
+  $(function() {
+    slug_updater = window.setInterval('auto_update_slug()', 100);
+  });
+  
+  $('#post_slug').keydown(function() { clearInterval(slug_updater); slug_updater = null; });
+  
+  function auto_update_slug() {
+    $('#post_slug').val($('#post_title').val().toLowerCase().replace(/[^a-z0-9\-]+/g, '-'));
+  }
+</script>

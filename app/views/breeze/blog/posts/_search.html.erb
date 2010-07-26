@@ -1,0 +1,4 @@
+<% form_tag search_blog_path, { :method => :get, :class => "blog-search-form" } do -%>
+  <%= text_field_tag :q, nil, :type => :search %>
+  <%= submit_tag "Search", :class => "search button" %>
+<% end -%>

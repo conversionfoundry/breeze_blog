@@ -1,11 +1,10 @@
-<% form_tag admin_blog_posts_path do -%>
-  <div id="<%= view %>-posts" class="posts-container container">
+<div id="<%= view %>-posts" class="posts-container container">
+	<%= form_tag admin_blog_posts_path, :method => :put do -%>
     <%= hidden_field_tag :mode, nil, :id => "#{view}_mode" %>
     <%= hidden_field_tag :view, view, :id => "#{view}_view" %>
-    <div class="table-tasks-popup">
-      <p>
-        <%#= link_to "Delete selected", "#", :class => "delete-selected-posts", :rel => :delete %>
-      </p>
+    <div class="with-selected" style="display: none;">
+      <strong>With selected:</strong>
+      <%= link_to "Delete", admin_blog_posts_path, :class => "small red delete button" %>
     </div>
     <table class="fancy posts">
       <thead>
@@ -19,10 +18,10 @@
         </tr>
       </thead>
       <tbody>
-        <% if @posts.empty? -%>
-          <tr><td class="empty" colspan="7">There are no <%= view %> posts to show here.</td></tr>
+        <% if @posts.any? -%>
+	        <%= render :partial => "post", :collection => posts %>
         <% else -%>
-          <%= render :partial => "post", :collection => posts %>
+	        <tr><td class="empty" colspan="7">There are no <%= view %> posts to show here.</td></tr>
         <% end -%>
       </tbody>
       <tfoot>
@@ -31,5 +30,5 @@
         </tr>
       </tfoot>
     </table>
-  </div>
-<% end -%>
+	<% end -%>
+</div>
