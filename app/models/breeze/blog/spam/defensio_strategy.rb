@@ -9,7 +9,7 @@ module Breeze
           document = document_from(comment)
           if document.save
             if document.allow?
-              comment.publish!
+              comment.publish! unless comment.blog.comment_moderation?
             else
               comment.spam!
             end
@@ -22,14 +22,14 @@ module Breeze
             Defender::Document.find(comment.defensio_signature)
           else
             returning Defender::Document.new do |document|
-              document.data[:content]      = comment.body(:source)
-              document.data[:type]         = "comment"
-              document.data[:platform]     = "defender"
-              document.data[:author_name] = comment.name
-              document.data[:author_email] = comment.email
-              document.data[:author_url] = comment.website
+              document.data[:content]          = comment.body(:source)
+              document.data[:type]             = "comment"
+              document.data[:platform]         = "defender"
+              document.data[:author_name]      = comment.name
+              document.data[:author_email]     = comment.email
+              document.data[:author_url]       = comment.website
               document.data[:author_logged_in] = comment.authenticated?
-              document.data[:author_trusted] = comment.authenticated?
+              document.data[:author_trusted]   = comment.authenticated?
             end
           end
         end

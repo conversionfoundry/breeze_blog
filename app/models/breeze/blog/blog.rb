@@ -4,6 +4,7 @@ module Breeze
       unloadable
 
       field :posts_per_page, :type => Integer, :default => 5
+      field :comment_moderation, :type => Boolean, :default => false
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
       embeds_one :spam_strategy, :class_name => "Breeze::Blog::Spam::Strategy"

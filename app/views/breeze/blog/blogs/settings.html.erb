@@ -25,10 +25,10 @@
       <%= scrollable_layout do %>
         <h1>Comment settings</h1>
         <%= form.fieldset :legend => "Moderation" do %>
-        
+          <%= form.check_box :comment_moderation, :label => "Require comment moderation?", :hint => "If checked, you will need to manually approve all comments before they appear on your blog." %>
         <% end %>
         <%= form.fieldset :legend => "Notifications" do %>
-        
+
         <% end %>
         <%= form.fieldset :legend => "Spam control" do %>
           <%= form.fields_for :spam_strategy do |spam| %>
