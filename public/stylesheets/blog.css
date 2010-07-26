@@ -408,6 +408,11 @@ table.comments img.gravatar,
 
 /* Post editor {{{ */
 
+.posts-container .post .title-link {
+  font-weight: bold;
+  font-size: 125%;
+}
+
 .fake-right-sidebar .post-categories label {
   float: none;
   width: auto;
@@ -415,3 +420,19 @@ table.comments img.gravatar,
 }
 
 /*}}}*/
+
+#main-tabs-tabs li small {
+  font-size: 100%;
+  background: #aaa;
+  color: white;
+  font-weight: bold;
+  min-width: 1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  display: inline-block;
+  text-shadow: rgba(0, 0, 0, 0.5) 0px 1px 1px;
+  -webkit-border-radius: 0.75em;
+  -moz-border-radius: 0.75em;
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.5) 0px 1px 1px;
+  -moz-box-shadow: inset rgba(0, 0, 0, 0.5) 0px 1px 1px;
+}

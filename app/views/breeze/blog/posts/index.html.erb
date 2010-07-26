@@ -4,13 +4,13 @@
 	<% tabs.header do -%>
 	  <%= link_to "New blog post", new_admin_blog_post_path, :class => "large new blog_post button" %>
 	<% end -%>
-  <% tabs.published :title => "Published (#{@posts.published.size})" do -%>
+  <% tabs.published :title => "Published <small>#{@posts.published.size}</small>".html_safe do -%>
     <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 10), :view => :published } %>
   <% end -%>
-  <% tabs.pending :title => "Pending (#{@posts.pending.size})" do -%>
+  <% tabs.pending :title => "Pending <small>#{@posts.pending.size}</small>".html_safe do -%>
     <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page], :per_page => 10), :view => :pending } %>
   <% end -%>
-  <% tabs.drafts :title => "Drafts (#{@posts.draft.size})" do -%>
+  <% tabs.draft :title => "Drafts <small>#{@posts.draft.size}</small>".html_safe do -%>
     <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page], :per_page => 10), :view => :draft } %>
   <% end -%>
 <% end %>
