@@ -9,6 +9,8 @@ module Breeze
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
       has_many_related :categories, :class_name => "Breeze::Blog::Category"
       embeds_one :spam_strategy, :class_name => "Breeze::Blog::Spam::Strategy"
+      field :rss_title
+      field :rss_description
       
       before_create :create_default_views
       before_create :create_default_spam_filtering
@@ -66,6 +68,10 @@ module Breeze
           klass = attrs[:_type].constantize
           self.spam_strategy = klass.new(attrs.except(:id, :_type))
         end
+      end
+      
+      def rss_link
+        permalink(:include_domain) + ".rss"
       end
       
     protected

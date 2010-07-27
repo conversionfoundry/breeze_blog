@@ -65,8 +65,34 @@
       <%= scrollable_layout do %>
         <h1>RSS Feed settings</h1>
         <%= form.fieldset do %>
-        
+          <%= form.text_field :rss_title, :label => "Title" %>
+          <%= form.text_area :rss_description, :label => "Description", :rows => 3 %>
         <% end %>
+        
+        <div class="explanation">
+          <p>Your RSS feed will be available at the following link:</p>
+          <ul class="rss">
+            <li><%= link_to blog.rss_link, blog.rss_link, :target => :_blank %>
+          </ul>
+          <h3>Notes:</h3>
+          <ul>
+            <li>
+              To enable <%= link_to "RSS autodiscovery", "http://www.rssboard.org/rss-autodiscovery", :target => :_blank %> (recommended), 
+              add the following code to the <code>&lt;head&gt;</code> section of your site:
+              <blockquote>
+                <pre>&lt;link rel="alternate" type="application/rss+xml" title="RSS" href="<%= blog.rss_link %>"&gt;</pre>
+              </blockquote>
+            <li>
+              You can get an RSS feed of any category, tag, etc., simply by appending <code>.rss</code> to the URL:
+              <blockquote>
+                <pre>http://example.com/blog/category/stuff<strong>.rss</strong></pre>
+              </blockquote>
+            </li>
+            <li>
+              <strong>(Advanced)</strong> To customise the generated XML, create or modify <code>/layouts/breeze/blog/index.rss.builder</code> in your theme.
+            </li>
+          </ul>
+        </div>
       <% end %>
       <%= fake_right_sidebar do %>
         <%= form.submit "Save settings", :class => "large green save button" %>

@@ -34,8 +34,16 @@ module Breeze
       
       def variables_for_render
         returning super do |vars|
-          vars[:posts] = posts.paginate :per_page => blog.posts_per_page, :page => page
+          vars[:posts] = if request.format.html?
+            posts.paginate :per_page => blog.posts_per_page, :page => page
+          else
+            posts
+          end
         end
+      end
+      
+      def render_as_rss
+        controller.send :render, :file => "/layouts/breeze/blog/index.rss.builder", :locals => { :blog => blog, :posts => posts }
       end
     end
   end
