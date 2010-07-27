@@ -8,6 +8,7 @@ module Breeze
         embedded_in :blog, :class_name => "Breeze::Blog::Blog", :inverse_of => :spam_strategy
       
         def submit(comment)
+          Breeze.queue comment, :deliver_notification!
         end
         
         def self.partial

@@ -11,6 +11,7 @@ if defined?(Defender)
             if document.save
               if document.allow?
                 comment.publish! unless comment.blog.comment_moderation?
+                Breeze.queue comment, :deliver_notification!
               else
                 comment.spam!
               end

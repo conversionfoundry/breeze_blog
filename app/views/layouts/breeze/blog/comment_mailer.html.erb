@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      body {
+        margin: 0px;
+        padding: 0px 32px;
+      }
+    
+      body, td, th {
+        font: 14px/1.5em Gotham, Helvetica, Arial, sans-serif;
+        text-align: left;
+      }
+      
+      a {
+        color: #ec008c;
+        text-decoration: none;
+      }
+      
+      .comment-status {
+        background: #ffc;
+        margin: 0px 0px 8px;
+        padding: 8px;
+      }
+      
+      .intro {
+        margin: 0px 0px 8px;
+        padding: 0px 8px;
+      }
+      
+      .gravatar {
+        float: left;
+        margin: 4px 8px 8px;
+      }
+      
+      .comment-body {
+        margin: 0px 8px 0px 80px;
+        border-left: 4px solid #ccc;
+        padding-left: 8px;
+        min-height: 64px;
+      }
+      
+      .comment-actions {
+        clear: left;
+        margin: 8px 0px 0px;
+        padding: 8px 8px 32px;
+        background: #ccc;
+      }
+      
+      .comment-actions li {
+        display: inline;
+        list-style: none;
+      }
+      
+      .comment-actions li a {
+        display: block;
+        margin: 0px 0px 8px;
+        padding-left: 8px;
+        line-height: 1em;
+        border-left: 1em solid #ec008c;
+      }
+    </style>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

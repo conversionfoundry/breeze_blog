@@ -111,6 +111,10 @@ module Breeze
         "http#{"s" if options[:secure]}://www.gravatar.com/avatar/#{gravatar_hash}?" + options.map { |k, v| "#{k.to_s[0,1]}=#{CGI.escape(v.to_s)}" }.join("&")
       end
       
+      def deliver_notification!
+        CommentMailer.comment_notification(self).deliver
+      end
+      
     protected
       def fill_in_author_details
         if author

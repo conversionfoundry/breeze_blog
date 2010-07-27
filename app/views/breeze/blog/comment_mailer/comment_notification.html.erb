@@ -1,0 +1,30 @@
+<% if @comment.published? %>
+  <p class="comment-status approved">
+    This comment has been automatically approved as per your blog's spam settings,
+    and is now visible on your website.
+  </p>
+<% elsif @comment.spam? %>
+  <p class="comment-status approved">
+    This comment has been automatically marked as spam,
+    and is not visible on your website.
+  </p>
+<% else %>
+  <p class="comment-status approved">
+    This comment is awaiting moderation,
+    and will not be visible on your website
+    until you manually approve it.
+  </p>
+<% end %>
+<p class="intro">
+  <strong><%= @comment.name %></strong> (<%= mail_to @comment.email %>)
+  posted a new comment on your blog post,
+  ‘<%= link_to @comment.post.title, @comment.post.permalink %>’:
+</p>
+<%= image_tag @comment.gravatar, :class => :gravatar %>
+<blockquote class="comment-body">
+  <%= @comment.body %>
+</blockquote>
+<ul class="comment-actions">
+  <li><%= link_to "Manage or reply to this comment", admin_blog_comments_url %></li>
+  <li><%= link_to "View this post", @comment.post.permalink %></li>
+</ul>
