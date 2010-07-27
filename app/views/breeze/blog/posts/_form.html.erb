@@ -66,9 +66,16 @@
   var slug_updater = null;
 
   $(function() {
-    slug_updater = window.setInterval('auto_update_slug()', 100);
-
-    $('#post_slug').keydown(function() { clearInterval(slug_updater); slug_updater = null; });
+    $('#post_new #post_title').live('input', function() {
+      $('#post_slug').each(function() {
+        if (!this.updated) {
+          $(this).val($('#post_title').val().toLowerCase().replace(/[^a-z0-9\-]+/g, '-'));
+        }
+      });
+    });
+    $('#post_slug').live('input', function() {
+      this.updated = true;
+    });
 
     $('.post-categories label').live('click', function() {
     });
@@ -101,8 +108,4 @@
     
     new $.TextboxList('#post_tags', { });
   });
-  
-  function auto_update_slug() {
-    $('#post_slug').val($('#post_title').val().toLowerCase().replace(/[^a-z0-9\-]+/g, '-'));
-  }
 </script>

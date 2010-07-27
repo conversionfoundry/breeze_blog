@@ -288,6 +288,31 @@ table td.even, table th.even, table tr.even td, table tr.even th {
   font-weight: bold;
 }
 
+#right #category-new {
+  
+}
+
+.fake-right-sidebar #new-category fieldset {
+  margin: 0px;
+  padding: 0px;
+}
+
+.fake-right-sidebar #new-category legend {
+  position: relative;
+  top: -8px;
+  padding: 0px;
+}
+
+.fake-right-sidebar #new-category input {
+  display: block;
+  width: 200px;
+  max-width: 200px;
+}
+
+.fake-right-sidebar #new-category #category_slug {
+  font-size: 100%;
+}
+
 /*}}}*/
 
 /* Comments {{{ */
