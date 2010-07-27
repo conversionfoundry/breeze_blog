@@ -37,6 +37,7 @@ module Breeze
       validates_presence_of :author_id, :message => "must be selected"
 
       before_destroy :destroy_children
+      before_save :regenerate_permalink!, :if => :published_at_changed?
       
       scope :published, lambda { where(:published_at.lt => Time.now.utc) }
       scope :pending,   lambda { where(:published_at.gt => Time.now.utc) }
@@ -53,16 +54,77 @@ module Breeze
         published_at || created_at
       end
       
+      def published_at=(time)
+        case time
+        when Array then write_attribute :published_at, Time.zone.local(*(time.map(&:to_i)))
+        else write_attribute :published_at, time
+        end
+      end
+      
+      def published_date
+        (published_at || Time.now).to_date
+      end
+      
+      def published_date=(date)
+        
+      end
+      
+      def published_time
+        (published_at || Time.now).to_time
+      end
+      
+      def published_time=(time)
+        
+      end
+      
       def published?
-        published_at.present? && published_at <= DateTime.now
+        status == :published
+      end
+      
+      def publish
+        self.published_at = Time.now
+      end
+      
+      def publish!
+        publish
+        save
       end
            
       def pending?
-        published_at.present? && published_at > DateTime.now
+        status == :pending
       end
       
+      def draft?
+        status == :draft
+      end
+      
+      def unpublish
+        self.published_at = nil
+      end
+      
+      def unpublish!
+        unpublish
+        save
+      end
+           
       def status
-        published? ? :published : :draft
+        if published_at.present?
+          if published_at <= DateTime.now
+            :published
+          else
+            :pending
+          end
+        else
+          :draft
+        end
+      end
+      
+      def status=(new_status)
+        case new_status.to_sym
+        when :published then publish unless published?
+        when :draft     then unpublish unless draft?
+        # TODO: work out what to do with status=(:pending)
+        end
       end
       
       def accepts_comments?
@@ -85,6 +147,27 @@ module Breeze
         }.flatten.reject(&:blank?).sort.uniq)
       end
       
+      def process(attrs={})
+        # TODO: this probably belongs somewhere else
+        attributes = returning({}) do |hash|
+          indexed = {}
+          
+          attrs.each_pair do |k, v|
+            if k =~ /^([\w_]+)\((\d+)i\)/
+              indexed[$1] ||= {}
+              indexed[$1][$2.to_i] = v
+            else
+              hash[k] = v
+            end
+          end
+          
+          indexed.each_pair do |k, v|
+            hash[k] = v.to_a.sort_by(&:first).map(&:last)           
+          end
+        end
+        super attributes
+      end
+      
     protected
       def regenerate_permalink!
         self.permalink = "#{blog.permalink}#{date_part}/#{slug}" unless blog.nil? || slug.blank?
@@ -94,7 +177,7 @@ module Breeze
         if published_at?
           published_at.strftime "/%Y/%m/%d"
         else
-          "/unpublished"
+          "/draft"
         end
       end
 

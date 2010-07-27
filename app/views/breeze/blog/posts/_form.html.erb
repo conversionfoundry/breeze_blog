@@ -13,20 +13,33 @@
 		  <% end %>
 
 		  <%= fake_right_sidebar do %>
-		    <%= form.text_field :published_at %>
-			  <%= submit_tag "Save", :class => "large green save button" %>
-			  <%= link_to "View", @post.permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
+		    <%= scrollable_layout do %>
+  		    <%= form.hidden_field :published_at, :value => "" %>
+  		    <fieldset id="post_publishing">
+            <%= check_box_tag :post_published, 1, !@post.draft? %>
+            <%= form.fieldset :id => "post_publish_date", :style => "display: #{@post.draft? ? :none : :block}" do %>
+              <li><%= text_field_tag :post_published_on, (@post.published_at || Time.now).strftime("%a %e %b, %Y") %></li>
+              <%= form.time_select :published_at, :label => false %>
+              <%= content_tag :li, :class => "pending-message", :style => "display: #{@post.pending? ? :block : :none}" do %>
+                This post has a ‘published’ date in the future. It won't be shown on your blog until that date: you can find it in the ‘pending’ tab of the posts list.
+              <% end %>
+            <% end %>
+          </fieldset>
+
+  			  <%= submit_tag "Save", :class => "large green save button" %>
+  			  <%= link_to "View", @post.permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
 			  
-			  <%= hidden_field_tag "post[category_ids][]", "" %>
-			  <%= form.fieldset :legend => "Categories", :class => "post-categories" do %>
-			    <% blog.categories.ascending(:position).each do |category| %>
-			      <li><%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), :id => "post_category_ids_#{category.id}" %> <%= label_tag "post_category_ids_#{category.id}", category %></li>
-			    <% end %>
-			  <% end %>
+  			  <%= hidden_field_tag "post[category_ids][]", "" %>
+  			  <%= form.fieldset :legend => "Categories", :class => "post-categories" do %>
+  			    <% blog.categories.ascending(:position).each do |category| %>
+  			      <li><%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), :id => "post_category_ids_#{category.id}" %> <%= label_tag "post_category_ids_#{category.id}", category %></li>
+  			    <% end %>
+  			  <% end %>
 			  
-			  <%= form.fieldset :legend => "Tags" do %>
-			    <%= form.text_area :tags, :value => form.object.tags.join(", "), :rows => 3, :cols => 16, :hint => "Separate tags with commas" %>
-			  <% end %>
+  			  <%= form.fieldset :legend => "Tags" do %>
+  			    <%= form.text_area :tags, :value => form.object.tags.join(", "), :rows => 3, :cols => 16, :hint => "Separate tags with commas" %>
+  			  <% end %>
+  			<% end %>
 		  <% end %>
 		<% end %>
 	<% end %>
@@ -61,6 +74,30 @@
     });
     
     $('textarea.markup').marquess();
+    $('#post_published_on').datepicker({
+      dateFormat: 'D d M, yy'
+    }).change(function() {
+      var new_date = $.datepicker.parseDate('D d M, yy', $(this).val());
+      $('#post_published_at_1i').val(new_date.getFullYear());
+      $('#post_published_at_2i').val(new_date.getMonth() + 1);
+      $('#post_published_at_3i').val(new_date.getDate());
+      new_date.setHours(parseInt($('#post_published_at_4i').val()));
+      new_date.setMinutes(parseInt($('#post_published_at_5i').val()));
+      $('#post_publish_date .pending-message').toggle(new_date > new Date());
+    });
+    
+    $('#post_published').change(function() {
+      var published = $('#post_published:checked').length > 0;
+      $('#post_publish_date').toggle(published).find(':input').attr('disabled', !published);
+    }).change().hide();
+    $('<div class="publish-toggle"></div>').insertAfter('#post_published').css({
+      'background-position': ($('#post_published:checked').length > 0 ? 0 : 100) + '% 0%'
+    }).click(function() {
+      $('#post_published').click().change();
+      $(this).animate({
+        'background-position': ($('#post_published:checked').length > 0 ? 0 : 100) + '% 0%'
+      }, 'slow', 'easeInOutQuad')
+    });
   });
   
   function auto_update_slug() {

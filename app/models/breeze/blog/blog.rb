@@ -35,6 +35,8 @@ module Breeze
           category_view
         elsif match[11] # tag
           tag_view
+        elsif match[12] # unpublished
+          post_view
         else
           index_view
         end
@@ -55,7 +57,6 @@ module Breeze
       def self.find_by_permalink(permalink)
         if permalink =~ Breeze::Blog::PERMALINK
           permalink = $`
-          puts permalink.red
           where(:permalink => permalink).first
         end
       end

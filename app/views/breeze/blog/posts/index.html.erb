@@ -48,7 +48,7 @@
       return false;
     });
     
-    $('#main-tabs-tabs li a').droppable({
+    $('#main-tabs-tabs li a').not('[href=#tab_pending]').droppable({
       accept: '.post',
       hoverClass: 'drop-hover',
       tolerance: 'pointer',

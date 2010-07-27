@@ -5,14 +5,18 @@ module Breeze
       
       attr_accessor :slug
       attr_accessor :comment
+      attr_accessor :preview_only
       
       def set_url_params(match)
         super
-        self.slug = match[9]
+        @preview_only = match[12].present?
+        self.slug = match[9] || match[12]
       end
       
+      alias_method :preview_only?, :preview_only
+      
       def posts
-        super.where(:slug => slug)
+        (preview_only? ? blog.posts : super).where(:slug => slug)
       end
       
       def post
