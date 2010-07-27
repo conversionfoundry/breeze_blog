@@ -36,8 +36,8 @@
   			    <% end %>
   			  <% end %>
 			  
-  			  <%= form.fieldset :legend => "Tags" do %>
-  			    <%= form.text_area :tags, :value => form.object.tags.join(", "), :rows => 3, :cols => 16, :hint => "Separate tags with commas" %>
+  			  <%= form.fieldset :legend => "Tags", :class => "post-tags" do %>
+  			    <%= form.text_field :tags, :label => false, :value => form.object.tags.join(", "), :hint => "Press <strong>Return</strong> after each new tag".html_safe, :wrap => { :class => "tag-list" } %>
   			  <% end %>
   			<% end %>
 		  <% end %>
@@ -98,6 +98,8 @@
         'background-position': ($('#post_published:checked').length > 0 ? 0 : 100) + '% 0%'
       }, 'slow', 'easeInOutQuad')
     });
+    
+    new $.TextboxList('#post_tags', { });
   });
   
   function auto_update_slug() {
