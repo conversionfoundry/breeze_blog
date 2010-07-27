@@ -10,6 +10,10 @@
 		      <%= form.select :author_id, Breeze::Admin::User.all.collect {|u| [ u.name, u._id ] }, :required => true %>
 					<%= form.text_area :body, :required => true, :rows => 16, :class => "markup", :label => false %> 
 		    <% end %>
+		    
+		    <%= form.fieldset :legend => "Summary", :id => "post_summary_fieldset", :class => "collapsible#{" collapsed" if @post.intro.blank?}" do %>
+				  <%= form.text_area :intro, :label => false, :rows => 6, :class => "markup", :hint => "Enter a brief summary (about #{blog.post_summary_length} words) of your post, to be displayed on index, archive, and category pages" %> 
+		    <% end %>
 		  <% end %>
 
 		  <%= fake_right_sidebar do %>
@@ -127,5 +131,11 @@
     });
     
     new $.TextboxList('#post_tags', { });
+    
+    $('#post_summary_fieldset.collapsed').find('ol.form').hide();
+    $('#post_summary_fieldset legend').click(function() {
+      var fieldset = $(this).parent()
+      fieldset.toggleClass('collapsed').find('ol.form').toggle(!fieldset.hasClass('collapsed'));
+    });
   });
 </script>

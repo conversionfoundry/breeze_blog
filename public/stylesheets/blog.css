@@ -673,6 +673,24 @@ fieldset.post-tags .textboxlist-bits input {
 
 #marquess_link_select li.closed ul { display: none; }
 
+fieldset.collapsible {
+  padding-top: 4px;
+}
+
+fieldset.collapsible legend {
+  cursor: pointer;
+  padding-left: 20px;
+  background: url(../images/collapse.png) no-repeat 0px -24px;
+}
+
+fieldset.collapsed legend {
+  background-position: 0px 0px;
+}
+
+.breeze-form ol.form li.text_area p.inline-hints {
+  margin-left: 0px;
+}
+
 /* Post tags {{{ */
 
 /* 

@@ -4,6 +4,7 @@ module Breeze
       unloadable
 
       field :posts_per_page, :type => Integer, :default => 5
+      field :post_summary_length, :type => Integer, :default => 100
       field :comment_moderation, :type => Boolean, :default => false
       field :comment_notifications, :type => Boolean, :default => true
       has_many_related :posts, :class_name => "Breeze::Blog::Post"

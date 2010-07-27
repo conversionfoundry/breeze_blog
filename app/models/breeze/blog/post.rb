@@ -29,7 +29,7 @@ module Breeze
       field :title
       field :slug
       field :body, :markdown => true
-      field :intro
+      field :intro, :markdown => true
       field :published_at, :type => Time
       field :comments_count, :type => Integer, :default => 0
       
@@ -44,8 +44,23 @@ module Breeze
       scope :draft,     where(:published_at => nil)
       
       def summary
-        # TODO: automatically create summaries, but allow manual customisation.
-        body
+        return intro if intro.present?
+
+        @generated_summary ||= begin
+          words, stripped = [], body(:source)
+          word_limit = blog.try(:post_summary_length) || 100
+
+          while !stripped.blank? && words.size < word_limit
+            stripped.sub! /^([^\s]+\s*)/ do
+              words << $1
+              ""
+            end
+            stripped.strip!
+          end
+          summary = words.join
+          summary.sub!(/[\s\.\,]*$/, '...') unless stripped.blank?
+          RDiscount.new(summary).to_html.html_safe
+        end
       end
       
       # Regardless of the published state of the post,
