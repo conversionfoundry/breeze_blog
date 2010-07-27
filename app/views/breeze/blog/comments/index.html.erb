@@ -4,22 +4,22 @@
   <% tabs.pending :title => "Pending" do -%>
     <h2>Pending comments</h2>
     <p>These comments are awaiting moderation from you or your team.</p>
-    <%= render "comments", :comments => @comments.pending.paginate %>
+    <%= render "comments", :comments => @comments.dup.pending.paginate %>
   <% end -%>
   <% tabs.published :title => "Published" do -%>
     <h2>Published comments</h2>
     <p>These comments have been approved for display on your website.</p>
-    <%= render "comments", :comments => @comments.published.paginate %>
+    <%= render "comments", :comments => @comments.dup.published.paginate %>
   <% end -%>
   <% tabs.spam :title => "Spam" do -%>
     <h2>Spam comments</h2>
     <p>These comments have been marked as spam and will not appear on your website.</p>
-    <%= render "comments", :comments => @comments.spam.paginate %>
+    <%= render "comments", :comments => @comments.dup.spam.paginate %>
   <% end -%>
   <% tabs.awaiting_reply :title => "Awaiting reply" do -%>
     <h2>Comments awaiting reply</h2>
     <p>These are published comments to which nobody from your organisation has posted a reply.</p>
-    <%= render "comments", :comments => @comments.awaiting_reply.paginate %>
+    <%= render "comments", :comments => @comments.dup.awaiting_reply.paginate %>
   <% end -%>
 <% end %>
 
