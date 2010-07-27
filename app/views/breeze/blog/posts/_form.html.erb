@@ -19,7 +19,7 @@
             <%= check_box_tag :post_published, 1, !@post.draft? %>
             <%= form.fieldset :id => "post_publish_date", :style => "display: #{@post.draft? ? :none : :block}" do %>
               <li><%= text_field_tag :post_published_on, (@post.published_at || Time.now).strftime("%a %e %b, %Y") %></li>
-              <%= form.time_select :published_at, :label => false %>
+              <%= form.time_select :published_at, :twelve_hour => true, :minute_step => 5, :label => false %>
               <%= content_tag :li, :class => "pending-message", :style => "display: #{@post.pending? ? :block : :none}" do %>
                 This post has a ‘published’ date in the future. It won't be shown on your blog until that date: you can find it in the ‘pending’ tab of the posts list.
               <% end %>
@@ -115,6 +115,15 @@
           $(this).trigger(e);
         }
       });
+    });
+    
+    $('#post_published_at_5i').after('<small class="am">am</small><small class="pm">pm</small>');
+    $('#post_published_at_4i').change(function() {
+      var h = parseInt($(this).val());
+      $(this).parent().find('.am').toggle(h < 12);
+      $(this).parent().find('.pm').toggle(h >= 12);
+    }).change().find('option').each(function() {
+      $(this).text($(this).text().replace(/ [AP]M$/i, ''));
     });
     
     new $.TextboxList('#post_tags', { });

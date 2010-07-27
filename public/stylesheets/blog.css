@@ -550,6 +550,12 @@ table.comments img.gravatar,
   padding: 1px 2px;
 }
 
+#post_publish_date small.am,
+#post_publish_date small.pm {
+  font-size: 100%;
+  padding-left: 0.5em;
+}
+
 #post_new .fake-right-sidebar .button,
 #post_edit .fake-right-sidebar .button {
   width: 184px;
