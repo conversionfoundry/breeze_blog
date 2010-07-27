@@ -1,5 +1,6 @@
 <%= content_tag :li, :class => :category, :id => "category_#{category.id}" do %>
   <%= link_to category.name, category.permalink, :class => "category-name", :target => :_blank %>
+  (<%= category.posts.count %>)
   <%= link_to "Delete".html_safe, admin_blog_category_path(category, :format => :js), :remote => true, :method => :delete, :class => :delete %>
   <%= link_to "Edit", edit_admin_blog_category_path(category), :class => :edit %>
   <%= link_to "View", category.permalink, :class => :view, :target => :_blank %>

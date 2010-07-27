@@ -14,11 +14,16 @@ module Breeze
       validates_presence_of :name, :slug
       validates_uniqueness_of :name, :slug
       before_validation :fill_in_slug
+      after_destroy :remove_from_posts
       
       def to_s; name; end
       
       def regenerate_permalink!
         self.permalink = "#{blog.permalink}/category/#{slug}"
+      end
+      
+      def posts
+        blog.posts.published.where :category_ids => id
       end
       
     protected
@@ -27,6 +32,10 @@ module Breeze
           self.slug = self.name.parameterize
           regenerate_permalink!
         end
+      end
+      
+      def remove_from_posts
+        Post.collection.update({ :blog_id => blog_id }, { "$pull" => { :category_ids => id } })
       end
     end
   end
