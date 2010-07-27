@@ -106,6 +106,17 @@
       }, 'slow', 'easeInOutQuad')
     });
     
+    $('#post_new, #post_edit').live('submit', function() {
+      $('.textboxlist-bit-editable-input', this).each(function() {
+        if ($(this).val() != '') {
+          this.focus();
+          e = jQuery.Event("keydown");
+          e.which = 13;
+          $(this).trigger(e);
+        }
+      });
+    });
+    
     new $.TextboxList('#post_tags', { });
   });
 </script>
