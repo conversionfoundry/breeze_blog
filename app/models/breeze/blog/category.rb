@@ -8,7 +8,6 @@ module Breeze
       
       field :name
       field :position, :type => Integer
-      field :posts_count, :type => Integer, :default => 0
       belongs_to_related :blog, :class_name => "Breeze::Blog::Blog", :inverse_of => :categories
       include Breeze::Content::Mixins::Permalinks
       
