@@ -1,4 +1,9 @@
 <%= content_tag :div, :class => "comment-posted" do %>
   <h2>Thanks for your comment!</h2>
-  <p>We appreciate your input. Your comment will be published soon (as long as it's not spam).</p>
+  <p>
+    We appreciate your input.
+    <% unless comment.published? %>
+      Your comment will be published soon (as long as it's not spam).
+    <% end %>
+  </p>
 <% end %>

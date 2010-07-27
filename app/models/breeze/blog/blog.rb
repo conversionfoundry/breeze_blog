@@ -5,6 +5,7 @@ module Breeze
 
       field :posts_per_page, :type => Integer, :default => 5
       field :comment_moderation, :type => Boolean, :default => false
+      field :comment_notifications, :type => Boolean, :default => true
       has_many_related :posts, :class_name => "Breeze::Blog::Post"
       has_many_related :comments, :class_name => "Breeze::Blog::Comment"
       has_many_related :categories, :class_name => "Breeze::Blog::Category"

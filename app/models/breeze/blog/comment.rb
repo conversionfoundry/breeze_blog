@@ -112,7 +112,9 @@ module Breeze
       end
       
       def deliver_notification!
-        CommentMailer.comment_notification(self).deliver
+        if blog.comment_notifications
+          CommentMailer.comment_notification(self).deliver
+        end
       end
       
     protected

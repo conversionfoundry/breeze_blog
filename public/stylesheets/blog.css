@@ -224,6 +224,10 @@ table td.even, table th.even, table tr.even td, table tr.even th {
   width: 100%;
 }
 
+#tab_comments li.check_box {
+  padding-left: 0px;
+}
+
 #tab_rss .text_area label {
   float: left;
   width: 25%;
