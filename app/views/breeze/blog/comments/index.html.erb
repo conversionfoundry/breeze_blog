@@ -35,11 +35,12 @@
       cursorAt: { left: -8, top: -8 },
       cancel: 'input, option, a',
       helper: function() {
-        return $('<div class="comment-drag-helper">(Comment)</div>');
+        return $('<div class="comment-drag-helper">1</div>');
       },
       start: function(event, ui) {
-        $(':checkbox', this).attr('checked', true);
-        $(ui.helper).html($(this).closest('tbody').find(':checked').length);
+        if ($(':checked', this).length > 0) {
+          $(ui.helper).html($(this).closest('tbody').find(':checked').length);
+        }
       }
     });
   }
@@ -63,7 +64,12 @@
       tolerance: 'pointer',
       drop: function(e, ui) {
         var comment_ids = [];
-        var comments = $(ui.draggable).closest('table').find('tbody :checked').closest('.comment');
+        var comments;
+        if ($(':checked', ui.draggable).length > 0) {
+          comments = $(ui.draggable).closest('table').find('tbody :checked').closest('.comment');
+        } else {
+          comments = $(ui.draggable);
+        }        
         comments.each(function() {
           comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]='));
         });
