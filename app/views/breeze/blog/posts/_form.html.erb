@@ -25,7 +25,7 @@
               <li><%= text_field_tag :post_published_on, (@post.published_at || Time.now).strftime("%a %e %b, %Y") %></li>
               <%= form.time_select :published_at, :twelve_hour => true, :minute_step => 5, :label => false %>
               <%= content_tag :li, :class => "pending-message", :style => "display: #{@post.pending? ? :block : :none}" do %>
-                This post has a ‘published’ date in the future. It won't be shown on your blog until that date: you can find it in the ‘pending’ tab of the posts list.
+                This post has a ‘published’ date in the future. It won't be shown on your blog until that date: you can find it in the ‘scheduled’ tab of the posts list.
               <% end %>
             <% end %>
           </fieldset>
