@@ -103,7 +103,7 @@
     }).change().hide();
     $('<div class="publish-toggle"></div>').insertAfter('#post_published').css({
       'background-position': ($('#post_published:checked').length > 0 ? 0 : 100) + '% 0%'
-    }).click(function() {
+    }).mousedown(function() {
       $('#post_published').click().change();
       $(this).animate({
         'background-position': ($('#post_published:checked').length > 0 ? 0 : 100) + '% 0%'
@@ -136,6 +136,21 @@
     $('#post_summary_fieldset legend').click(function() {
       var fieldset = $(this).parent()
       fieldset.toggleClass('collapsed').find('ol.form').toggle(!fieldset.hasClass('collapsed'));
+    });
+        
+    $('#post_new :input, #post_edit :input').live('change input', function() {
+      console.log(this);
+      window.unsaved_changes = true;
+    });
+    window.unsaved_changes = false;
+    window.onbeforeunload = function() {
+      if (window.unsaved_changes) {
+        return 'If you continue, you will lose your unsaved changes. Do you want to proceed anyway?';
+      }
+    };
+    $('.save.button').click(function() {
+      window.unsaved_changes = false;
+      return true;
     });
   });
 </script>
