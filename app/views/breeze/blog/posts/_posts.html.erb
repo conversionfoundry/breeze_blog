@@ -18,10 +18,10 @@
         </tr>
       </thead>
       <tbody>
-        <% if @posts.any? -%>
+        <% if posts.any? -%>
 	        <%= render :partial => "post", :collection => posts %>
         <% else -%>
-	        <tr><td class="empty" colspan="7">There are no <%= view %> posts to show here.</td></tr>
+	        <tr><td class="empty" colspan="7">There are no posts to show here.</td></tr>
         <% end -%>
       </tbody>
       <tfoot>

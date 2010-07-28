@@ -257,6 +257,10 @@ table.fancy tfoot .pagination a:hover, table.fancy tfoot .pagination a:focus {
   text-decoration: underline;
 }
 
+table.fancy tbody tr:hover td {
+  background-color: #fff;
+}
+
 table.fancy td.empty {
   padding: 3em 8px;
   text-align: center;
@@ -266,10 +270,6 @@ table.fancy td.empty {
 
 table.fancy tbody tr:hover td.empty {
   background: none;
-}
-
-tbody tr:hover {
-  background-color: #fff;
 }
 
 table td.odd,  table th.odd,  table tr.odd td,  table tr.odd th {
