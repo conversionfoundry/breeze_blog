@@ -12,17 +12,17 @@ module Breeze
         drafts_count = blog.posts.draft.count
         pending_comments_count = blog.comments.pending.count
         content_tag :ul, [
-          blog_menu_item("Blog overview", "/admin/blog"),
-          blog_menu_item("Posts #{"<small>#{drafts_count}</small>" unless drafts_count.zero?}", "/admin/blog/posts"),
-          blog_menu_item("Comments #{"<small>#{pending_comments_count}</small>" unless pending_comments_count.zero?}", "/admin/blog/comments"),
-          blog_menu_item("Settings", "/admin/blog/settings"),
+          blog_menu_item("Blog overview", admin_blog_root_path),
+          blog_menu_item("Posts #{"<small>#{drafts_count}</small>" unless drafts_count.zero?}", /#{admin_blog_posts_path}/),
+          blog_menu_item("Comments #{"<small>#{pending_comments_count}</small>" unless pending_comments_count.zero?}", admin_blog_comments_path),
+          blog_menu_item("Settings", admin_blog_settings_path),
           blog_menu_item("View blog", blog.permalink, :target => :_blank)
         ].join.html_safe, :class => :actions
       end
       
       def blog_menu_item(name, path, options = {})
-        content_tag :li, link_to(name.html_safe, path, options),
-          :class => "#{:active if request.path == path}"
+        content_tag :li, link_to(name.html_safe, path.is_a?(Regexp) ? path.source : path.to_s, options),
+          :class => "#{:active if path === request.path}"
       end
       
       def at_a_glance(count, label, link = nil, options = {})
