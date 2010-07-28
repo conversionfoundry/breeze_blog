@@ -13,8 +13,8 @@ module Breeze
         pending_comments_count = blog.comments.pending.count
         content_tag :ul, [
           blog_menu_item("Blog overview", admin_blog_root_path),
-          blog_menu_item("Posts #{"<small>#{drafts_count}</small>" unless drafts_count.zero?}", /#{admin_blog_posts_path}/),
-          blog_menu_item("Comments #{"<small>#{pending_comments_count}</small>" unless pending_comments_count.zero?}", admin_blog_comments_path),
+          blog_menu_item("Posts #{"<small title=\"#{pluralize drafts_count, "draft"}\">#{drafts_count}</small>" unless drafts_count.zero?}", /#{admin_blog_posts_path}/),
+          blog_menu_item("Comments #{"<small title=\"#{pluralize pending_comments_count, "comment"} pending moderation\">#{pending_comments_count}</small>" unless pending_comments_count.zero?}", admin_blog_comments_path),
           blog_menu_item("Settings", admin_blog_settings_path),
           blog_menu_item("View blog", blog.permalink, :target => :_blank)
         ].join.html_safe, :class => :actions
