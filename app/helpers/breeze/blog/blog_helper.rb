@@ -42,6 +42,16 @@ module Breeze
           end
         end
       end
+      
+      def tag_cloud(blog)
+        tags = blog.tags_with_frequencies
+        total = tags.inject(0) { |t, (k, v)| t + v }
+        cloud = tags.to_a.sort_by(&:first).map do |tag, count|
+          link_to tag, blog.permalink + "/tag/#{CGI.escape tag}", :class => :tag, :style => "font-size: #{count * 100 / total + 50}%"
+        end.join(" ")
+        content_tag :div, cloud.html_safe, :class => "tag-cloud"
+      end
+      
     end
   end
 end

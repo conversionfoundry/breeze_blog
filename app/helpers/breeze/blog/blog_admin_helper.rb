@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     module BlogAdminHelper
-      unloadable
-      
       def blog_switcher
         blogs = Breeze::Blog::Blog
         
@@ -25,6 +23,32 @@ module Breeze
       def blog_menu_item(name, path, options = {})
         content_tag :li, link_to(name.html_safe, path, options),
           :class => "#{:active if request.path == path}"
+      end
+      
+      def at_a_glance(count, label, link = nil, options = {})
+        returning "" do |html|
+          html << "<tr>"
+          html << "<td class=\"count\">#{count}</td>"
+          html << "<td class=\"label\">"
+          html << link_to_unless(link.blank?, label.gsub(/(\w+)\(s\)/) { count == 1 ? $1 : $1.pluralize }, link, options)
+          html << "</td>"
+          html << "</tr>"
+        end.html_safe
+      end
+      
+      def last_published(blog)
+        latest_post = blog.posts.published.last
+        if latest_post.present?
+          post_date = latest_post.published_at.to_date
+          today = Time.zone.now.to_date
+          if post_date == today
+            "You last published a blog post <strong>today</strong>. Great stuff!"
+          else
+            "It's been <strong>#{pluralize today - post_date, "day"}</strong> since you last published a blog post. " + link_to("Get writing!", new_admin_blog_post_path)
+          end
+        else
+          "You haven't published any blog posts yet. " + link_to("Get writing!", new_admin_blog_post_path)
+        end.html_safe
       end
     end
   end

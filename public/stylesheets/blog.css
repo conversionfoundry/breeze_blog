@@ -1,3 +1,105 @@
+/* Blog overview {{{ */
+
+#blog_dashboard {
+  margin: 0px 4px 16px;
+}
+
+#blog_dashboard .box {
+  float: left;
+  margin: 8px;
+  padding: 8px;
+  background: #eee;
+  -webkit-border-radius: 8px;
+  -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0px 1px 4px;
+}
+
+#blog_dashboard .col1 { width: 96px; }
+#blog_dashboard .col2 { width: 224px; }
+#blog_dashboard .col3 { width: 352px; }
+#blog_dashboard .col4 { width: 480px; }
+#blog_dashboard .col5 { width: 608px; }
+#blog_dashboard .col6 { width: 736px; }
+
+#blog_dashboard .box h2 {
+  margin: 0px;
+  padding: 0px 0px 4px;
+  border-bottom: 1px solid #999;
+  font-weight: normal;
+}
+
+#blog_dashboard .box .at-a-glance {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+#blog_dashboard .box .at-a-glance td {
+  border-bottom: 1px solid #ccc;
+  padding: 0px;
+  vertical-align: middle;
+}
+
+#blog_dashboard .box .at-a-glance td.count {
+  font-size: 200%;
+  width: 1.5em;
+  text-align: right;
+  padding-right: 0.25em;
+}
+
+#blog_dashboard .box p {
+  margin: 1ex 0px 0px;
+}
+
+#blog_dashboard .box .comment {
+  clear: left;
+  padding: 0px;
+  border-bottom: 1px solid #999;
+  -webkit-transition: background-color 0.25s ease-in;
+}
+
+#blog_dashboard .box .comment-author {
+  margin: 0px 0px 1ex;
+  padding: 0.5ex 0px;
+  border-bottom: 1px dotted #ccc;
+}
+
+#blog_dashboard .box .gravatar {
+  float: left;
+}
+
+#blog_dashboard .box .comment-body {
+  margin-left: 40px;
+}
+
+#blog_dashboard .box .comment-actions {
+  margin: 0.5ex 0px 0.5ex 40px;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease-in;
+}
+
+#blog_dashboard .box .comment-actions .button {
+  padding: 2px 5px 3px;
+}
+
+#blog_dashboard .box .gravatar {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px;
+}
+
+#blog_dashboard .box .comment:hover {
+  background: white;
+}
+
+#blog_dashboard .box .comment:hover .comment-actions {
+  opacity: 1.0;
+}
+
+/*}}}*/
+
 /* Left Panel {{{ */
 
 #left #blog-switcher {

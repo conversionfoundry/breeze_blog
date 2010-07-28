@@ -4,8 +4,7 @@ module Breeze
       unloadable
       
       def index
-        @awaiting_moderation = blog.comments.pending
-        @awaiting_reply = blog.comments.awaiting_reply
+        @recent_comments = blog.comments.not_spam.most_recent(5)
       end
       
       def setup_default

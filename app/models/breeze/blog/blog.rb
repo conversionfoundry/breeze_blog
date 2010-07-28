@@ -1,6 +1,8 @@
 module Breeze
   module Blog
     class Blog < Breeze::Content::Page
+      extend ActiveSupport::Memoizable
+      
       unloadable
 
       field :posts_per_page, :type => Integer, :default => 5
@@ -75,6 +77,25 @@ module Breeze
       def rss_link
         permalink(:include_domain) + ".rss"
       end
+      
+      def tags
+        @tags ||= posts.published.only(:tags).collect(&:tags).flatten
+      end
+      memoize :tags
+      
+      def unique_tags
+        tags.uniq
+      end
+      
+      def tags_with_frequencies
+        returning Hash.new do |hash|
+          tags.each do |tag|
+            hash[tag] ||= 0
+            hash[tag] += 1
+          end
+        end
+      end
+      memoize :tags_with_frequencies
       
     protected
       def create_default_views

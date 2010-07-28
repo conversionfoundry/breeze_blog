@@ -38,6 +38,8 @@ module Breeze
       scope :root, where(:parent_id => nil)
       scope :replies_to, lambda { |comment| where(:parent_id => comment.id) }
       scope :awaiting_reply, where(:status => "published", :author_id => nil, :replies_count => 0).ascending(:created_at)
+      scope :not_spam, where(:status.ne => "spam")
+      scope :most_recent, lambda { |n| descending(:created_at).limit(n) }
 
       def root?
         parent_id.nil?

@@ -1,0 +1,11 @@
+<%= content_tag :div, :class => :comment, :id => "comment_#{comment.id}" do %>
+  <p class="comment-author"><strong><%= link_to_unless comment.website.blank?, comment.name, comment.website %></strong> on <%= link_to comment.post.title, comment.post.permalink %></p>
+  <%= image_tag comment.gravatar(:size => 32), :class => :gravatar %>
+  <%= content_tag :div, comment.body, :class => "comment-body" %>
+  <p class="comment-actions">
+    <%= link_to "Approve", approve_admin_blog_comment_path(comment), :remote => true, :method => :put, :class => "small green approve button" unless comment.published? %>
+    <%= link_to "Spam", spam_admin_blog_comment_path(comment), :remote => true, :method => :put, :class => "small black spam button" unless comment.spam? %>
+    <%= link_to "Delete", admin_blog_comment_path(comment), :remote => true, :method => :delete, :class => "small red delete button" %>
+    <%= link_to "Reply", new_admin_blog_comment_path(:comment => { :parent_id => comment.id }), :class => "small black reply button" if comment.published? %>
+  </p>
+<% end %>
