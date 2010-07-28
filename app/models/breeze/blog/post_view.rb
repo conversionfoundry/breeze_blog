@@ -32,7 +32,7 @@ module Breeze
       end
       
       def variables_for_render
-        super.merge :post => post, :comments => post.comments.public, :comment => comment
+        super.merge :post => post, :comments => post.present? ? post.comments.public : [], :comment => comment
       end
       
       def render!
