@@ -1,24 +1,30 @@
 <% content_for :title, "Blog posts" %>
 
 <%= tabbed_layout do |tabs| %>
-	<% tabs.header do -%>
+	<% tabs.header do %>
 	  <%= link_to "New blog post", new_admin_blog_post_path, :class => "large new blog_post button" %>
-	<% end -%>
-  <% tabs.draft :title => "Drafts <small>#{@posts.draft.size}</small>".html_safe do -%>
-    <h2>Draft posts</h2>
-    <p>These posts are not yet ready to be displayed on your blog.</p>
-    <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page], :per_page => 10), :view => :draft } %>
-  <% end -%>
-  <% tabs.pending :title => "Pending <small>#{@posts.pending.size}</small>".html_safe do -%>
-    <h2>Pending posts</h2>
-    <p>These posts are ready to be displayed on your blog, but are awaiting their publication date.</p>
-    <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page], :per_page => 10), :view => :pending } %>
-  <% end -%>
-  <% tabs.published :title => "Published <small>#{@posts.published.size}</small>".html_safe do -%>
-    <h2>Published posts</h2>
-    <p>These posts are available on your blog.</p>
-    <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 10), :view => :published } %>
-  <% end -%>
+	<% end %>
+  <% tabs.draft :title => "Drafts <small>#{@posts.draft.size}</small>".html_safe do %>
+    <%= scrollable_layout do %>
+      <h2>Draft posts</h2>
+      <p>These posts are not yet ready to be displayed on your blog.</p>
+      <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page], :per_page => 10), :view => :draft } %>
+    <% end %>
+  <% end %>
+  <% tabs.pending :title => "Pending <small>#{@posts.pending.size}</small>".html_safe do %>
+    <%= scrollable_layout do %>
+      <h2>Pending posts</h2>
+      <p>These posts are ready to be displayed on your blog, but are awaiting their publication date.</p>
+      <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page], :per_page => 10), :view => :pending } %>
+    <% end %>
+  <% end %>
+  <% tabs.published :title => "Published <small>#{@posts.published.size}</small>".html_safe do %>
+    <%= scrollable_layout do %>
+      <h2>Published posts</h2>
+      <p>These posts are available on your blog.</p>
+      <%= render :partial => "posts", :locals => { :posts => @posts.published.paginate(:page => params[:published_page], :per_page => 10), :view => :published } %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <% content_for :left do %>

@@ -480,11 +480,11 @@ table td.even, table th.even, table tr.even td, table tr.even th {
 	
 /* TODO: Some refactoring required to remove repetition (comments and posts). CB 23 Jul 2010. */
 
-.tab-pane h2 {
+.tab-pane>.scrollable>h2 {
   margin: 16px 16px 0px;
 }
 
-.tab-pane>p {
+.tab-pane>.scrollable>p {
   margin: 8px 16px 0px;
 }
 
