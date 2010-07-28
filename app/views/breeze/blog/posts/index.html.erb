@@ -11,9 +11,9 @@
       <%= render :partial => "posts", :locals => { :posts => @posts.draft.paginate(:page => params[:draft_page], :per_page => 10), :view => :draft } %>
     <% end %>
   <% end %>
-  <% tabs.pending :title => "Pending <small>#{@posts.pending.size}</small>".html_safe do %>
+  <% tabs.pending :title => "Scheduled <small>#{@posts.pending.size}</small>".html_safe do %>
     <%= scrollable_layout do %>
-      <h2>Pending posts</h2>
+      <h2>Scheduled posts</h2>
       <p>These posts are ready to be displayed on your blog, but are awaiting their publication date.</p>
       <%= render :partial => "posts", :locals => { :posts => @posts.pending.paginate(:page => params[:pending_page], :per_page => 10), :view => :pending } %>
     <% end %>

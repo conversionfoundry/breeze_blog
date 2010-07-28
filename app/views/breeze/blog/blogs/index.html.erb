@@ -11,7 +11,7 @@
           <h2>Your posts</h2>
           <table class="at-a-glance">
             <%= at_a_glance blog.posts.published.count, "public post(s)", admin_blog_posts_path + "#tab_published" %>
-            <%= at_a_glance blog.posts.pending.count, "post(s) awaiting publication", admin_blog_posts_path + "#tab_pending" %>
+            <%= at_a_glance blog.posts.pending.count, "post(s) scheduled for publication", admin_blog_posts_path + "#tab_pending" %>
             <%= at_a_glance blog.posts.draft.count, "draft(s)", admin_blog_posts_path + "#tab_draft" %>
             <%= at_a_glance blog.categories.count, "category(s)", admin_blog_settings_path + "#tab_categories" %>
             <%= at_a_glance blog.unique_tags.count, "tag(s)" %>

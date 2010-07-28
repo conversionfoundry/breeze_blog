@@ -15,10 +15,10 @@
       <%= render "comments", :comments => @comments.dup.pending.paginate %>
     <% end %>
   <% end %>
-  <% tabs.published :title => "Published" do %>
+  <% tabs.published :title => "Approved" do %>
     <%= scrollable_layout do %>
-      <h2>Published comments</h2>
-      <p>These comments have been approved for display on your website.</p>
+      <h2>Approved comments</h2>
+      <p>These comments have been approved for display on your website, either automatically or by an editor.</p>
       <%= render "comments", :comments => @comments.dup.published.paginate %>
     <% end %>
   <% end %>
