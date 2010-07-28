@@ -57,7 +57,7 @@
       return false;
     });
     
-    $('#main-tabs-tabs li a').droppable({
+    $('#main-tabs-tabs li:not(.active) a').not('[href=#tab_awaiting_reply]').droppable({
       accept: '.comment',
       hoverClass: 'drop-hover',
       tolerance: 'pointer',
