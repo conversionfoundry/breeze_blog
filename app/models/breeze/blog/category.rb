@@ -12,7 +12,7 @@ module Breeze
       include Breeze::Content::Mixins::Permalinks
       
       validates_presence_of :name, :slug
-      validates_uniqueness_of :name, :slug
+      validates_uniqueness_of :name, :slug, :scope => :blog_id
       before_validation :fill_in_slug
       after_destroy :remove_from_posts
       
