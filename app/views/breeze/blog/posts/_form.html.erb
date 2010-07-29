@@ -31,7 +31,7 @@
           </fieldset>
 
   			  <%= submit_tag "Save", :class => "large green save button" %>
-  			  <%= link_to "View", @post.permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
+  			  <%= link_to "View", @post.draft_permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
 			  
   			  <%= hidden_field_tag "post[category_ids][]", "" %>
   			  <%= form.fieldset :legend => "Categories", :class => "post-categories" do %>

@@ -183,6 +183,10 @@ module Breeze
         super attributes
       end
       
+      def draft_permalink
+        "#{blog.permalink}/draft/#{slug}"
+      end
+      
     protected
       def regenerate_permalink!
         self.permalink = "#{blog.permalink}#{date_part}/#{slug}" unless blog.nil? || slug.blank?
@@ -199,7 +203,7 @@ module Breeze
       def destroy_children
         comments.map(&:destroy)
       end
-      
+   
     end
   end
 end
