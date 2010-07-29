@@ -81,7 +81,7 @@
         comments.each(function() {
           comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]='));
         });
-        comments.fadeOut(function() { $(this).remove(); });
+        comments.fadeOut(function() { $('#' + $(this).attr('id')).remove(); });
         $.ajax({
           url: '/admin/blog/comments.js',
           type: 'post',
