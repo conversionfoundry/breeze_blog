@@ -1,1 +1,2 @@
 $('#tab_<%= @comments.first.status %> .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.send(@comments.first.status).paginate(:page => 1)) %>');
+makeDraggable('.comments-container .comment');

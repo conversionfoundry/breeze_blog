@@ -1,1 +1,2 @@
 $('#tab_<%= @posts.first.status %> .posts-container').replaceWith('<%= escape_javascript render("posts", :posts => blog.posts.send(@posts.first.status).paginate(:page => 1)) %>');
+makeDraggable('.posts-container .post');
