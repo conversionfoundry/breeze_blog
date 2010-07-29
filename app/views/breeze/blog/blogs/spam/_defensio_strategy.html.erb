@@ -1,3 +1,4 @@
 <%= spam.fieldset do %>
+  <% spam.object = Breeze::Blog::Spam::DefensioStrategy.new unless spam.object.is_a?(Breeze::Blog::Spam::DefensioStrategy) %>
   <%= spam.text_field :api_key, :label => "Defensio API key", :hint => %Q{You can <a href="http://defensio.com/" target="_blank">request your own API key</a> from Defensio.}.html_safe %>
 <% end %>
