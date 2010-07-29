@@ -115,7 +115,9 @@ module Breeze
       
       def deliver_notification!
         if blog.comment_notifications
-          CommentMailer.comment_notification(self).deliver
+          unless author_id == post.author_id
+            CommentMailer.comment_notification(self).deliver
+          end
         end
       end
       
