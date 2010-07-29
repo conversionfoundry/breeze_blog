@@ -166,7 +166,7 @@ module Breeze
       end
       
       def submit_for_approval
-        blog.spam_strategy.submit self
+        blog.spam_strategy.submit self unless published?
       end
     end
   end
