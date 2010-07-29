@@ -35,7 +35,7 @@ module Breeze
       end
       
       def remove_from_posts
-        Post.collection.update({ :blog_id => blog_id }, { "$pull" => { :category_ids => id } })
+        Post.collection.update({ :blog_id => blog_id }, { "$pull" => { :category_ids => id } }, :multi => true)
       end
     end
   end
