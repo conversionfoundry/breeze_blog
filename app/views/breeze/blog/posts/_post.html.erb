@@ -4,13 +4,13 @@
     <%= link_to post.title, edit_admin_blog_post_path(post), :class => "title-link" %>
     <p class="categories"><%= post.category_ids.empty? ? "(no category)" : post.categories.join(", ") %></p>
     <p class="post-actions">
-      <%= link_to "View", post.permalink, :target => :_blank, :class => "small black button" %>
+      <%= link_to "View", post.pending? ? post.draft_permalink : post.permalink, :target => :_blank, :class => "small black button" %>
       <%= link_to "Edit", edit_admin_blog_post_path(post), :class => "small black button" %>
       <%= link_to "Delete", admin_blog_post_path(post), :remote => true, :method => :delete, :class => "small red delete button" %>
     </p>
   </td>
   <td class="author"><%= post.author.name %></td>
   <td class="tags"><%= post.tags.empty? ? "(no tags)" : post.tags.join(", ") %></td>
-  <td class="comments"><%= link_to post.comments_count || 0, post.permalink + "#comments", :target => :_blank %></td>
+  <td class="comments"><%= link_to_unless post.comments_count.zero?, post.comments_count || 0, post.draft_permalink + "#comments", :target => :_blank %></td>
   <td class="date"><%= (post.published_at || post.updated_at).to_date.to_formatted_s(:rfc822) %><br /><small><%= post.published? ? "(Published)" : "(Edited)" %></small></td>
 <% end -%>
