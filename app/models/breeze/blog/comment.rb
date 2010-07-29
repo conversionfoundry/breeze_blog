@@ -59,7 +59,9 @@ module Breeze
         end                                       # end
 
         define_method :"#{s.sub(/ed$/, "")}!" do  # def publish!
-          update_attributes :status => s          #   update_attributes :status => "published"
+          unless status == s.to_sym               #   unless status == :published
+            update_attributes :status => s        #     update_attributes :status => "published"
+          end                                     #   end
         end                                       # end
         
         define_method :"was_#{s}?" do
@@ -130,7 +132,10 @@ module Breeze
       end
       
       def auto_approve
-        self.status = "published" if author_id || author
+        if author_id || author
+          self.status = "published"
+          parent.try :publish! unless root?
+        end
       end
     
       def gravatar_hash

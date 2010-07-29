@@ -2,7 +2,7 @@
   $('#comment_new').closest('.ui-dialog-content').dialog('close');
   $('#tab_<%= @comment.status %> .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.send(@comment.status).paginate(:page => 1)) %>');
   <% unless @comment.root? %>
-    $('#tab_awaiting_reply').find('#comment_<%= @comment.parent_id %>').remove();
+    $('#tab_awaiting_reply,#tab_pending').find('#comment_<%= @comment.parent_id %>').remove();
   <% end %>
 <% else %>
   $('#comment_new').closest('.ui-dialog-content').html('<%= escape_javascript render(:template => "/breeze/blog/comments/new") %>')
