@@ -18,7 +18,8 @@ module Breeze
       
       before_create :create_default_views
       before_create :create_default_spam_filtering
-      after_destroy :destroy_posts
+      after_destroy :destroy_posts_and_categories
+      before_save :fix_post_permalinks
       
       def view_for(controller, request)
         if controller.admin_signed_in? && request.params[:view]
@@ -111,8 +112,20 @@ module Breeze
         self.spam_strategy = Breeze::Blog::Spam::NoStrategy.new
       end
       
-      def destroy_posts
+      def destroy_posts_and_categories
         posts.destroy_all
+        categories.destroy_all
+      end
+      
+      def fix_post_permalinks
+        if permalink_changed?
+          # TODO: probably not the best idea to load them all at once
+          posts.all.each do |post|
+            post.blog = self # prevent loading from the database
+            post.send :regenerate_permalink!
+            post.save!
+          end
+        end
       end
     end
   end
