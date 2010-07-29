@@ -18,6 +18,7 @@ module Breeze
       
       before_create :create_default_views
       before_create :create_default_spam_filtering
+      after_destroy :destroy_posts
       
       def view_for(controller, request)
         if controller.admin_signed_in? && request.params[:view]
@@ -108,6 +109,10 @@ module Breeze
       
       def create_default_spam_filtering
         self.spam_strategy = Breeze::Blog::Spam::NoStrategy.new
+      end
+      
+      def destroy_posts
+        posts.destroy_all
       end
     end
   end
