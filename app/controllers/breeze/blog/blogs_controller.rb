@@ -24,8 +24,11 @@ module Breeze
       
       def settings
         if request.put?
-          blog.update_attributes params[:blog]
-          redirect_to admin_blog_settings_path
+          if blog.update_attributes params[:blog]
+            redirect_to admin_blog_settings_path
+          else
+            render :action => "settings"
+          end
         end
       end
     end

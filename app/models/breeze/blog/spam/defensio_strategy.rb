@@ -3,7 +3,22 @@ if defined?(Defender)
     module Blog
       module Spam
         class DefensioStrategy < Strategy
+          unloadable
+          
           field :api_key
+          
+          class InvalidKey < StandardError; end
+          
+          validates_each :api_key do |record, attr, value|
+            begin
+              open("http://api.defensio.com/2.0/users/#{value}.yaml") do |f|
+                y = YAML::load(f)["defensio-result"]
+                raise InvalidKey unless y["status"] == "success"
+              end
+            rescue
+              record.errors.add attr, "is not a valid API key"
+            end
+          end
       
           def submit(comment)
             Defender.api_key = api_key

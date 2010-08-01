@@ -2,7 +2,7 @@
 
 <%= tabbed_layout do |tabs| %>
   <% tabs.general :title => "General settings" do %>
-    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path, :method => :put do |form| %>
+    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path + "#tab_general", :method => :put do |form| %>
       <%= scrollable_layout do %>
         <h1>General settings</h1>
         <%= form.fieldset :legend => "Dates and times" do %>
@@ -19,7 +19,7 @@
     <% end %>
   <% end %>
   <% tabs.comments :title => "Comments" do %>
-    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path, :method => :put do |form| %>
+    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path + "#tab_comments", :method => :put do |form| %>
       <%= scrollable_layout do %>
         <h1>Comment settings</h1>
         <%= form.fieldset :legend => "Moderation" do %>
@@ -59,7 +59,7 @@
     <% end %>
   <% end %>
   <% tabs.rss :title => "RSS" do %>
-    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path, :method => :put do |form| %>
+    <%= breeze_form_for blog, :as => :blog, :url => admin_blog_settings_path + "#tab_rss", :method => :put do |form| %>
       <%= scrollable_layout do %>
         <h1>RSS Feed settings</h1>
         <%= form.fieldset do %>

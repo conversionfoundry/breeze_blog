@@ -404,6 +404,11 @@ table td.even, table th.even, table tr.even td, table tr.even th {
   background: url(../images/rss-24.png) no-repeat 0px 50%;
 }
 
+#blog_spam_strategy_attributes_api_key {
+  font-family: Monaco, monospace;
+  width: 24em;
+}
+
 /* }}} */
 
 /* Categories {{{ */

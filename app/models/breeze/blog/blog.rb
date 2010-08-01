@@ -16,6 +16,8 @@ module Breeze
       field :rss_title
       field :rss_description
       
+      validates_associated :spam_strategy
+            
       before_create :create_default_views
       before_create :create_default_spam_filtering
       after_destroy :destroy_posts_and_categories
