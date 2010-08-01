@@ -1,3 +1,4 @@
 $('#comment_<%= @comment.id %>').fadeOut(function() { $(this).remove(); });
 $('#tab_<%= @comment.status %> .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.send(@comment.status).paginate(:page => 1)) %>');
+$('#tab_awaiting_reply .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.awaiting_reply.paginate(:page => 1)) %>');
 makeDraggable('.comments-container .comment');

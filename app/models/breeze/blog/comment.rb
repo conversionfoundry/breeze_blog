@@ -159,7 +159,7 @@ module Breeze
       end
 
       def increment_parent_replies_count(by = 1)
-        parent.update_attributes :replies_count => (parent.replies_count || 0) + by if parent
+        self.class.collection.update({ :_id => parent_id }, { '$inc' => { :replies_count => by } }) if parent_id
       end
       
       def decrement_parent_replies_count
