@@ -1,6 +1,6 @@
 <% if @comment.errors.empty? %>
   $('#comment_new').closest('.ui-dialog-content').dialog('close');
-  $('#tab_<%= @comment.status %> .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.send(@comment.status).paginate(:page => 1)) %>');
+  $('#tab_<%= @comment.status %> .comments-container').replaceWith('<%= escape_javascript render("comments", :comments => blog.comments.send(@comment.status).descending(:created_at).paginate(:page => 1)) %>');
   <% unless @comment.root? %>
     $('#tab_awaiting_reply,#tab_pending').find('#comment_<%= @comment.parent_id %>').remove();
   <% end %>
