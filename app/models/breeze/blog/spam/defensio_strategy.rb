@@ -15,7 +15,7 @@ if defined?(Defender)
                 y = YAML::load(f)["defensio-result"]
                 raise InvalidKey unless y["status"] == "success"
               end
-            rescue
+            rescue OpenURI::HTTPError => e
               record.errors.add attr, "is not a valid API key"
             end
           end
