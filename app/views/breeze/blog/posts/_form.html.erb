@@ -82,7 +82,7 @@
     });
 
     $('.post-categories li').live('click', function(e) {
-      if (!$(event.target).is(':input')) {
+      if ($(event.target).is('li')) {
         $(this).find(':input').each(function() { this.checked = !this.checked; });
       }
     });
