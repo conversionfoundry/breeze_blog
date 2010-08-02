@@ -105,7 +105,7 @@
       $('.with-selected', container).toggle($('tbody :checked', container).length > 0);
     });
     
-    $('.comments-container .with-selected .button').live('click', function() {
+    $('.comments-container .with-selected .button.not(.delete)').live('click', function() {
       var comment_ids = [];
       var comments = $(this).closest('.container').find('tbody :checked').closest('.comment');
       comments.each(function() { comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]=')); });
@@ -123,6 +123,38 @@
       $(this).closest('.with-selected').hide();
       return false;
     });
+    
+    $('.comments-container .with-selected .delete').live('click', function() {
+      var button = this;
+      var comment_ids = [];
+      var comments = $(this).closest('.container').find('tbody :checked').closest('.comment');
+      comments.each(function() { comment_ids.push(this.id.replace(/^comment_/, 'comment_ids[]=')); });
+      
+      $('<p>Really delete these comments?</p>').dialog({
+        title:'Confirm delete',
+        modal: true,
+        resizable: false,
+        buttons: {
+          Delete: function() {
+            $(this).dialog('close');
+            $.ajax({
+              url:'/admin/blog/comments.js',
+              type:'post',
+              dataType:'script',
+              data: '_method=delete&' + comment_ids.join('&')
+            });
+            $(button).closest('.container').find('thead :checked').removeAttr('checked');
+            $(button).closest('.with-selected').hide();
+          },
+          Cancel: function() {
+            $(this).dialog('close');
+          }
+        },
+        close: function() { $(this).remove(); }
+      });
+      return false;
+    });
+    
     
     $('.comments .comment .reply').live('click', function() {
       $.get(this.href, function(data) {
