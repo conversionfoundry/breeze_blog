@@ -5,7 +5,7 @@ describe Breeze::Blog::Comment do
     Breeze::Content::Item.collection.drop
     Breeze::Admin::User.collection.drop
     @root = Breeze::Content::Page.create! :title => "Home", :slug => "", :permalink => "/"
-    @blog = Breeze::Blog::Blog.create! :title => "Blog", :parent => @root
+    @blog = Breeze::Blog::Blog.create! :title => "Blog", :parent => @root, :comment_notifications => false
     @user = Breeze::Admin::User.create! :first_name => "Test", :last_name => "Test", :email => "test@example.com"
   end
   

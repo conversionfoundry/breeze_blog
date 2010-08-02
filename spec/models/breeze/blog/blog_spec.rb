@@ -5,7 +5,7 @@ describe Breeze::Blog::Blog do
     Breeze::Content::Item.collection.drop
     
     @root = Breeze::Content::Page.create :title => "Home", :slug => "", :permalink => "/"
-    @blog = Breeze::Blog::Blog.create :title => "Blog", :parent => @root
+    @blog = Breeze::Blog::Blog.create :title => "Blog", :parent => @root, :comment_notifications => false
   end
 
   %w(index post archive category tag).each do |v|
@@ -46,6 +46,36 @@ describe Breeze::Blog::Blog do
       @view = @blog.view_from_permalink("/blog/2010/7/27")
       @view.start_date.should == Time.zone.local(2010, 7, 27).to_date
       @view.end_date.should   == Time.zone.local(2010, 7, 27).to_date
+    end
+  end
+  
+  describe "with some posts" do
+    before :each do
+      Breeze::Blog::Comment.collection.drop
+      Breeze::Blog::Post.collection.drop
+      Breeze::Admin::User.collection.drop
+      @author = Breeze::Admin::User.create :first_name => "Test", :last_name => "User", :email => "test@example.com"
+      @post = @blog.posts.create! :title => "Test post", :body => "Test post", :author => @author
+      @comment = @post.comments.create :name => "Test", :email => "test@example.com", :body => "Test"
+    end
+    
+    it "should have posts" do
+      @blog.reload
+      @blog.posts.count.should_not be_zero
+    end
+    
+    describe "when deleted" do
+      before :each do
+        @blog.destroy
+      end
+      
+      it "should delete its posts" do
+        Breeze::Blog::Post.count.should be_zero
+      end
+      
+      it "should delete its comments" do
+        Breeze::Blog::Comment.count.should be_zero
+      end
     end
   end
 end

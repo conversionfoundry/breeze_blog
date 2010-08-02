@@ -167,7 +167,7 @@ module Breeze
       end
       
       def destroy_children
-        blog.comments.replies_to(self).map(&:destroy)
+        Comment.replies_to(self).map(&:destroy)
       end
       
       def submit_for_approval
