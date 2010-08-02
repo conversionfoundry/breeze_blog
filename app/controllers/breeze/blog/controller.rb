@@ -13,11 +13,11 @@ module Breeze
       end
 
       def blog
-        @blog ||= if session[:blog_id]
-          Blog.find session[:blog_id]
-        else
-          Blog.first
-        end
+        @blog ||= if session[:blog_id].present?
+          Blog.where(:_id => session[:blog_id]).first
+        end || Blog.first
+        session[:blog_id] = @blog.try(:id)
+        @blog
       end
       helper_method :blog
     end
