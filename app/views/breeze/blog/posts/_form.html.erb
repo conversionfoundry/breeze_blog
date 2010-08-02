@@ -81,7 +81,8 @@
       this.updated = true;
     });
 
-    $('.post-categories label').live('click', function() {
+    $('.post-categories li').live('click', function() {
+      $(':input', this).each(function() { this.checked = !this.checked; });
     });
     
     $('textarea.markup').marquess();
