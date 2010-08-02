@@ -81,8 +81,10 @@
       this.updated = true;
     });
 
-    $('.post-categories li').live('click', function() {
-      $(':input', this).each(function() { this.checked = !this.checked; });
+    $('.post-categories li').live('click', function(e) {
+      if (!$(event.target).is(':input')) {
+        $(this).find(':input').each(function() { this.checked = !this.checked; });
+      }
     });
     
     $('textarea.markup').marquess();
@@ -140,7 +142,6 @@
     });
         
     $('#post_new :input, #post_edit :input').live('change input', function() {
-      console.log(this);
       window.unsaved_changes = true;
     });
     window.unsaved_changes = false;
