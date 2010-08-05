@@ -3,8 +3,6 @@ if defined?(Defender)
     module Blog
       module Spam
         class DefensioStrategy < Strategy
-          unloadable
-          
           field :api_key
           
           class InvalidKey < StandardError; end

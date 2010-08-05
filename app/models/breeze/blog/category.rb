@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class Category
-      unloadable
-      
       include Mongoid::Document
       identity :type => String
       

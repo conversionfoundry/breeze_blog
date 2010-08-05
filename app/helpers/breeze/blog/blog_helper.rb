@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     module BlogHelper
-      unloadable
-      
       def comments_link(post)
         str = if post.comments_count.blank? || post.comments_count.zero?
           "No comments"

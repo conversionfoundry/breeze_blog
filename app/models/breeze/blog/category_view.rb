@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class CategoryView < IndexView
-      unloadable
-      
       attr_accessor :category_slug
       
       def set_url_params(match)

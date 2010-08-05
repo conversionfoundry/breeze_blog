@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class View < Breeze::Content::PageView
-      unloadable
-      
       def blog
         content
       end

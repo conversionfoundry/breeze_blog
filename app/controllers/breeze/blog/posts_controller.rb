@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class PostsController < Breeze::Blog::Controller
-      unloadable
-      
       def index
         @posts = blog.posts # TODO Order result set
       end

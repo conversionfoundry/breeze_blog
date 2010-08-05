@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class TagView < IndexView
-      unloadable
-      
       attr_accessor :tag_slug
       
       def set_url_params(match)

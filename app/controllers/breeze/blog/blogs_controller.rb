@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class BlogsController < Breeze::Blog::Controller
-      unloadable
-      
       def index
         @recent_comments = blog.comments.not_spam.most_recent(5)
       end

@@ -3,8 +3,6 @@ module Breeze
     class Blog < Breeze::Content::Page
       extend ActiveSupport::Memoizable
       
-      unloadable
-
       field :posts_per_page, :type => Integer, :default => 5
       field :post_summary_length, :type => Integer, :default => 100
       field :comment_moderation, :type => Boolean, :default => false

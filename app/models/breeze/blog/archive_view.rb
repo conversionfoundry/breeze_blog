@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class ArchiveView < IndexView
-      unloadable
-      
       attr_accessor :year, :month, :day
       
       def set_url_params(match)

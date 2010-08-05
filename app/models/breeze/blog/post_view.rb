@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class PostView < ArchiveView
-      unloadable
-      
       attr_accessor :slug
       attr_accessor :comment
       attr_accessor :preview_only

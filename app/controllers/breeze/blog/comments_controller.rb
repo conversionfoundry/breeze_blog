@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class CommentsController < Breeze::Blog::Controller
-      unloadable
-      
       def index
         if request.xhr?
           @comments = blog.comments.send(params[:tab]).descending(:created_at).paginate(:page => params[:page] || 1)

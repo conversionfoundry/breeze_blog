@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class Post
-      unloadable
-      
       include Mongoid::Document
       include Mongoid::Timestamps
       identity :type => String

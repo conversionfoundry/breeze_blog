@@ -1,8 +1,6 @@
 module Breeze
   module Blog
     class CategoriesController < Breeze::Blog::Controller
-      unloadable
-
       before_filter :check_for_blogs
       
       def create
