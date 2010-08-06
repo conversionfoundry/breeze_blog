@@ -4,7 +4,7 @@ end
 
 Breeze.hook :define_abilities do |user, abilities|
   abilities.instance_eval do
-    can :manage, Breeze::Content::Blog if user.editor?
+    can :manage, Breeze::Blog::Blog if user.editor?
   end
 end
 
