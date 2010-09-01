@@ -1,4 +1,4 @@
-Rails.application.routes.draw do |map|
+Rails.application.routes.draw do
   scope "admin/blog", :module => "breeze/blog", :name_prefix => "admin_blog" do
     root :to => "blogs#index"
     controller :blogs do
