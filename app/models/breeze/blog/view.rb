@@ -32,8 +32,9 @@ module Breeze
       
       def variables_for_render
         returning super do |vars|
+          vars[:posts] = posts.paginate :per_page => blog.posts_per_page, :page => page
           # vars[:posts] = if request.format.html?
-            posts.paginate :per_page => blog.posts_per_page, :page => page
+          #   posts.paginate :per_page => blog.posts_per_page, :page => page
           # else
           #   posts
           # end
