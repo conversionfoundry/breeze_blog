@@ -18,7 +18,7 @@ module Breeze
       end
       
       def post
-        posts.first
+        @post ||= posts.first
       end
 
       def comment
