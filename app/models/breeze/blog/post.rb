@@ -192,7 +192,7 @@ module Breeze
       
       def date_part
         if published_at?
-          published_at.strftime "/%Y/%m/%d"
+          published_at.in_time_zone.strftime "/%Y/%m/%d"
         else
           "/draft"
         end

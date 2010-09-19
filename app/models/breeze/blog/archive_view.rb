@@ -35,8 +35,10 @@ module Breeze
       
       def posts
         super.where(
-          :published_at.gte => start_time.utc,
-          :published_at.lt  => end_time.utc
+          :published_at => {
+            '$gte' => start_time.utc,
+            '$lt'  => end_time.utc
+          }
         )
       end
     end
