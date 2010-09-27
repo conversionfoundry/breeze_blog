@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Breeze
   module Blog
     class CommentMailer < Breeze::Mailer
