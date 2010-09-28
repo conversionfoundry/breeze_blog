@@ -84,6 +84,7 @@ module Breeze
         comment.blog.comments.build params.reverse_merge(
           :post_id   => comment.post_id,
           :parent_id => comment.id,
+          :blog_id   => comment.blog.id,
           :body      => "@#{comment.name}\n\n"
         )
       end

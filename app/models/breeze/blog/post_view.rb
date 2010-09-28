@@ -36,6 +36,7 @@ module Breeze
       def render!
         if request.post? && post.accepts_comments?
           @comment = post.comments.build(request.params[:comment])
+          @comment.blog_id = blog.id
           if @comment.save
             controller.flash[:comment_id] = @comment.id
             controller.send :redirect_to, post.permalink
