@@ -28,7 +28,7 @@ module Breeze
             Dir[File.join(File.dirname(__FILE__), "*.rb")].each do |f|
               require f
             end
-            subclasses.each do |k|
+            subclasses.map(&:to_s).each do |k|
               classes << k
             end
           end

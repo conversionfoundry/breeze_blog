@@ -14,8 +14,8 @@ module Breeze
 
       def blog
         @blog ||= if session[:blog_id].present?
-          Blog.where(:_id => session[:blog_id]).first
-        end || Blog.first
+          Breeze::Blog::Blog.where(:_id => session[:blog_id]).first
+        end || Breeze::Blog::Blog.first
         session[:blog_id] = @blog.try(:id)
         @blog
       end

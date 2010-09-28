@@ -14,12 +14,6 @@ module Breeze
         def public
           @parent.comments.published.ascending(:created_at)
         end
-        
-        def build(params = {})
-          returning super do |new_comment|
-            new_comment.blog_id = @parent.blog_id
-          end
-        end
       end
       has_many_related :categories, :class_name => "Breeze::Blog::Category", :stored_as => :array
       field :tags, :type => Array, :default => lambda { [] }
