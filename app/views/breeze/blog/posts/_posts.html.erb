@@ -26,7 +26,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="6"><%= will_paginate posts %>&nbsp;</td>
+          <td colspan="6"><%= will_paginate posts, :params => { :controller => "breeze/blog/posts", :action => view } %>&nbsp;</td>
         </tr>
       </tfoot>
     </table>

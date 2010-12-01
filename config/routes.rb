@@ -11,7 +11,13 @@ Rails.application.routes.draw do
 
     put "posts(.:format)" => "posts#mass_update"
     delete "posts(.:format)" => "posts#mass_destroy"
-    resources :posts
+    resources :posts do
+      collection do
+        get :draft
+        get :scheduled
+        get :published
+      end
+    end
     put "comments(.:format)" => "comments#mass_update"
     delete "comments(.:format)" => "comments#mass_destroy"
     resources :comments do

@@ -54,7 +54,7 @@
     $('.posts-container tfoot .pagination a').live('click', function() {
       var container = $(this).closest('.container');
       var tab = $(this).closest('.tab-pane').attr('id').replace(/^tab_/, '');
-      $.get(this.href + '&tab=' + tab, function(data) {
+      $.get(this.href, function(data) {
         container.replaceWith(data);
         makeDraggable('.posts-container:visible .post');
       });
