@@ -179,6 +179,14 @@ module Breeze
         "#{blog.permalink}/draft/#{slug}"
       end
       
+      def next
+        @next ||= self.class.where(:published_at.gt => published_at).order_by(:published_at.asc).first
+      end
+      
+      def previous
+        @previous ||= self.class.where(:published_at.lt => published_at).order_by(:published_at.desc).first
+      end
+      
     protected
       def regenerate_permalink!
         self.permalink = "#{blog.permalink}#{date_part}/#{slug}" unless blog.nil? || slug.blank?
