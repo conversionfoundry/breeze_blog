@@ -58,7 +58,7 @@ module Breeze
       # Regardless of the published state of the post,
       # returns a date suitable for public display.
       def time
-        Time.zone.utc_to_local(published_at || created_at)
+        (published_at || created_at).try :in_time_zone
       end
       
       def published_at=(time)
