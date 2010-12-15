@@ -44,7 +44,7 @@ module Breeze
           if post_date == today
             "You last published a blog post <strong>today</strong>. Great stuff!"
           else
-            "It's been <strong>#{pluralize today - post_date, "day"}</strong> since you last published a blog post. " + link_to("Get writing!", new_admin_blog_post_path)
+            "It's been <strong>#{pluralize((today - post_date).to_i, "day")}</strong> since you last published a blog post. " + link_to("Get writing!", new_admin_blog_post_path)
           end
         else
           "You haven't published any blog posts yet. " + link_to("Get writing!", new_admin_blog_post_path)
