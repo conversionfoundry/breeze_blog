@@ -69,7 +69,7 @@ module Breeze
       end
       
       def published_date
-        (published_at || Time.now).to_date
+        (published_at || Time.now).in_time_zone.to_date
       end
       
       def published_date=(date)
@@ -77,7 +77,7 @@ module Breeze
       end
       
       def published_time
-        (published_at || Time.now).to_time
+        (published_at || Time.now).in_time_zone.to_time
       end
       
       def published_time=(time)
