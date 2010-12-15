@@ -29,7 +29,7 @@ module Breeze
       validates_presence_of :author_id, :message => "must be selected"
 
       before_destroy :destroy_children
-      before_save :regenerate_permalink!, :if => :published_at_changed?
+      before_save :regenerate_permalink!
       
       scope :published, lambda { where(:published_at.lt => Time.now.utc) }
       scope :pending,   lambda { where(:published_at.gt => Time.now.utc) }
