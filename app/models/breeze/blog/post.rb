@@ -15,7 +15,7 @@ module Breeze
           @parent.comments.published.ascending(:created_at)
         end
       end
-      has_many_related :categories, :class_name => "Breeze::Blog::Category", :stored_as => :array
+      has_many_related :categories, :class_name => "Breeze::Blog::Category", :as => :array
       field :tags, :type => Array, :default => lambda { [] }
       
       field :title
@@ -156,7 +156,7 @@ module Breeze
       
       def process(attrs={})
         # TODO: this probably belongs somewhere else
-        attributes = returning({}) do |hash|
+        attributes = ({}).tap do |hash|
           indexed = {}
           
           attrs.each_pair do |k, v|

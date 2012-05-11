@@ -23,7 +23,7 @@ module Breeze
       
       def view_for(controller, request)
         if controller.admin_signed_in? && request.params[:view]
-          returning views.by_name(request.params[:view]) do |view|
+          views.by_name(request.params[:view]).tap do |view|
             view.with_url_params Breeze::Blog::PERMALINK.match(permalink)
           end
         else  
@@ -48,7 +48,7 @@ module Breeze
         else
           index_view
         end
-        
+       
         view.with_url_params match
       end
       
@@ -90,7 +90,7 @@ module Breeze
       end
       
       def tags_with_frequencies
-        returning Hash.new do |hash|
+        Hash.new.tap do |hash|
           tags.each do |tag|
             hash[tag] ||= 0
             hash[tag] += 1

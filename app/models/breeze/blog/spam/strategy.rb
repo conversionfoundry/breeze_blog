@@ -12,7 +12,7 @@ module Breeze
         end
         
         def self.partial
-          "/breeze/blog/blogs/spam/" + name.demodulize.underscore
+          "/breeze/admin/blog/blogs/spam/" + name.demodulize.underscore
         end
         
         def partial
@@ -24,7 +24,7 @@ module Breeze
         end
         
         def self.strategies
-          @strategies ||= returning([]) do |classes|
+          @strategies ||= ([]).tap do |classes|
             Dir[File.join(File.dirname(__FILE__), "*.rb")].each do |f|
               require f
             end

@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
-  scope "admin/blog", :module => "breeze/blog", :name_prefix => "admin_blog" do
+Breeze::Engine.routes.draw do
+  namespace "admin" do
+  namespace "blog" do
     root :to => "blogs#index"
     controller :blogs do
       post :setup_default
@@ -31,5 +32,6 @@ Rails.application.routes.draw do
         put :reorder
       end
     end    
+  end
   end
 end

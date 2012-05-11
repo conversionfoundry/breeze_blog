@@ -14,7 +14,7 @@ module Breeze
       end
       
       def with_url_params(match)
-        returning dup do |view|
+        dup.tap do |view|
           view.set_url_params(match)
         end
       end
@@ -31,7 +31,7 @@ module Breeze
       end
       
       def variables_for_render
-        returning super do |vars|
+        super.tap do |vars|
           vars[:posts] = posts.paginate :per_page => blog.posts_per_page, :page => page
           # vars[:posts] = if request.format.html?
           #   posts.paginate :per_page => blog.posts_per_page, :page => page

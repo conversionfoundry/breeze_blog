@@ -5,34 +5,34 @@
     <%= scrollable_layout do %>
       <h2>Comments awaiting reply</h2>
       <p>These are published comments to which nobody from your organisation has posted a reply.</p>
-      <%= render "comments", :comments => @comments.dup.awaiting_reply.paginate %>
+      <%= render "breeze/admin/blog/comments/comments", :comments => @comments.dup.awaiting_reply.paginate %>
     <% end %>
   <% end %>
   <% tabs.pending :title => "Pending" do %>
     <%= scrollable_layout do %>
       <h2>Pending comments</h2>
       <p>These comments are awaiting moderation from you or your team.</p>
-      <%= render "comments", :comments => @comments.dup.pending.paginate %>
+      <%= render "breeze/admin/blog/comments/comments", :comments => @comments.dup.pending.paginate %>
     <% end %>
   <% end %>
   <% tabs.published :title => "Approved" do %>
     <%= scrollable_layout do %>
       <h2>Approved comments</h2>
       <p>These comments have been approved for display on your website, either automatically or by an editor.</p>
-      <%= render "comments", :comments => @comments.dup.published.paginate %>
+      <%= render "breeze/admin/blog/comments/comments", :comments => @comments.dup.published.paginate %>
     <% end %>
   <% end %>
   <% tabs.spam :title => "Spam" do %>
     <%= scrollable_layout do %>
       <h2>Spam comments</h2>
       <p>These comments have been marked as spam and will not appear on your website.</p>
-      <%= render "comments", :comments => @comments.dup.spam.paginate %>
+      <%= render "breeze/admin/blog/comments/comments", :comments => @comments.dup.spam.paginate %>
     <% end %>
   <% end %>
 <% end %>
 
 <% content_for :left do %>
-  <%= render :partial => "breeze/blog/blogs/left" %>
+  <%= render :partial => "breeze/admin/blog/blogs/left" %>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">

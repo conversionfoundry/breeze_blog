@@ -36,7 +36,7 @@ if defined?(Defender)
             if comment.attributes[:defensio_signature].present?
               Defender::Document.find(comment.defensio_signature)
             else
-              returning Defender::Document.new do |document|
+              Defender::Document.new.tap do |document|
                 document.data[:content]          = comment.body(:source)
                 document.data[:type]             = "comment"
                 document.data[:platform]         = "defender"

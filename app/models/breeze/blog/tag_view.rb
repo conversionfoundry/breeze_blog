@@ -21,7 +21,7 @@ module Breeze
       end
       
       def variables_for_render
-        returning super do |vars|
+        super.tap do |vars|
           vars[:tags] = tags
           vars[:tag] = tag
         end

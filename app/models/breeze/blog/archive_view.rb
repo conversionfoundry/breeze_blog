@@ -34,6 +34,7 @@ module Breeze
       end
       
       def posts
+        binding.pry
         super.where(
           :published_at => {
             '$gte' => start_time.utc,

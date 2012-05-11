@@ -38,7 +38,7 @@
         <div id="recent-comments" class="box col3">
           <h2>Recent comments</h2>
           <% if @recent_comments.any? %>
-            <%= render :partial => "comment", :collection => @recent_comments %>
+            <%= render :partial => "breeze/admin/blog/blogs/comment", :collection => @recent_comments %>
             <p><%= link_to "More comments", admin_blog_comments_path %></p>
           <% else %>
             <p>You have no recent comments</p>
@@ -53,7 +53,7 @@
 <% end %>
 
 <% content_for :left do %>
-  <%= render :partial => "left" %>
+  <%= render :partial => "breeze/admin/blog/blogs/left" %>
 <% end %>
 
 <% content_for :head do %>

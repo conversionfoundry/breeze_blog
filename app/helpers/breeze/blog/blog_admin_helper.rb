@@ -26,7 +26,7 @@ module Breeze
       end
       
       def at_a_glance(count, label, link = nil, options = {})
-        returning "" do |html|
+        "".tap do |html|
           html << "<tr>"
           html << "<td class=\"count\">#{count}</td>"
           html << "<td class=\"label\">"

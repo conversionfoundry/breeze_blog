@@ -48,13 +48,13 @@
     <%= scrollable_layout do %>
       <h1>Categories</h1>
       <ul id="blog_categories" class="categories">
-        <%= render :partial => "/breeze/blog/categories/category", :collection => blog.categories.ascending(:position) %>
+        <%= render :partial => "/breeze/admin/blog/categories/category", :collection => blog.categories.ascending(:position) %>
       </ul>
     <% end %>
     
     <%= fake_right_sidebar do %>
       <div id="new-category">
-        <%= render "/breeze/blog/categories/new" %>
+        <%= render "/breeze/admin/blog/categories/new" %>
       </div>
     <% end %>
   <% end %>
@@ -100,7 +100,7 @@
 <% end %>
 
 <% content_for :left do %>
-  <%= render :partial => "left" %>
+  <%= render :partial => "breeze/admin/blog/blogs/left" %>
 <% end %>
 
 <% content_for :right do %>
