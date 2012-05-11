@@ -6,6 +6,6 @@ module Breeze
   end
 end
 
-require "/Users/blair/source/rails32/experiment/vendor/engines/breeze_blog/app/models/breeze/blog.rb"
-require "/Users/blair/source/rails32/experiment/vendor/engines/breeze_blog/init.rb"
+require "#{Breeze::Blog::Engine.root}/app/models/breeze/blog.rb"
+require "#{Breeze::Blog::Engine.root}/init.rb"
 
