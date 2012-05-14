@@ -1,7 +1,7 @@
 module Breeze
   module Admin
     module Blog
-      class CategoriesController < Breeze::Blog::Controller
+      class CategoriesController < Breeze::Admin::Blog::Controller
         before_filter :check_for_blogs
         
         def create
