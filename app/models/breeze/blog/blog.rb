@@ -1,7 +1,6 @@
 module Breeze
   module Blog
     class Blog < Breeze::Content::Page
-      extend ActiveSupport::Memoizable
       
       field :posts_per_page, :type => Integer, :default => 5
       field :post_summary_length, :type => Integer, :default => 100
@@ -83,21 +82,19 @@ module Breeze
       def tags
         @tags ||= posts.published.only(:tags).collect(&:tags).flatten
       end
-      memoize :tags
       
       def unique_tags
         tags.uniq
       end
       
       def tags_with_frequencies
-        Hash.new.tap do |hash|
+        @tags_with_frequencies ||= Hash.new.tap do |hash|
           tags.each do |tag|
             hash[tag] ||= 0
             hash[tag] += 1
           end
         end
       end
-      memoize :tags_with_frequencies
       
     protected
       def create_default_views
