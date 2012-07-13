@@ -1,19 +1,21 @@
 module Breeze
   module Blog
     class CategoryView < IndexView
-      attr_accessor :category_slug
+      attr_accessor :permalink
       
-      def set_url_params(match)
+      def set_url_params(permalink)
         super
-        self.category_slug = match[10]
+        self.permalink = permalink
       end
             
       def category
-        @category ||= blog.categories.where(:slug => category_slug).first
+        @category ||= blog.categories.where(:permalink => permalink).first
       end
       
       def posts
-        super.where :category_ids => category.try(:id)
+        require 'pry'
+        binding.pry
+        super.where :category_id => category.try(:id)
       end
       
       def variables_for_render

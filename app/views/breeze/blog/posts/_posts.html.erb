@@ -12,7 +12,6 @@
           <th class="first" style="width:2em;"><input class="checkbox select-all" type="checkbox" /></th>
           <th style="">Post</th>
           <th style="width:15%;">Author</th>
-          <th style="width:20%;">Tags</th>
           <th style="width:10%;">Comments</th>
           <th class="last" style="width:15%;">Date</th>
         </tr>
@@ -21,12 +20,12 @@
         <% if posts.any? -%>
 	        <%= render :partial => "post", :collection => posts %>
         <% else -%>
-	        <tr><td class="empty" colspan="7">There are no posts to show here.</td></tr>
+	        <tr><td class="empty" colspan="6">There are no posts to show here.</td></tr>
         <% end -%>
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="6"><%= will_paginate posts, :params => { :controller => "breeze/blog/posts", :action => view } %>&nbsp;</td>
+          <td colspan="5"><%= will_paginate posts, :params => { :controller => "breeze/blog/posts", :action => view } %>&nbsp;</td>
         </tr>
       </tfoot>
     </table>

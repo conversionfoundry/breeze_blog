@@ -32,24 +32,16 @@ module Breeze
       end
       
       def view_from_permalink(permalink)
-        match = Breeze::Blog::PERMALINK.match(permalink) || {}
-        view = if match[3] # year/month/day
-          if match[9] # slug
-            post_view
-          else
-            archive_view
-          end
-        elsif match[10] # category
-          category_view
-        elsif match[11] # tag
-          tag_view
-        elsif match[12] # unpublished
-          post_view
-        else
+        count = permalink.count('/')
+        view = if count <= 1
           index_view
+        elsif count <= 2
+          category_view
+        else
+          post_view
         end
         
-        view.with_url_params match
+        view.with_url_params permalink
       end
       
       def method_missing(sym, *args, &block)
@@ -63,9 +55,14 @@ module Breeze
       end
       
       def self.find_by_permalink(permalink)
-        if permalink =~ Breeze::Blog::PERMALINK
-          permalink = $`
-          where(:permalink => permalink).first
+        post = Post.where(:permalink => permalink).first
+        if post
+          post.blog
+        else
+          category = Category.where(:permalink => permalink).first
+          if category
+            category.blog
+          end
         end
       end
       
@@ -80,31 +77,11 @@ module Breeze
         permalink(:include_domain) + ".rss"
       end
       
-      def tags
-        @tags ||= posts.published.only(:tags).collect(&:tags).flatten
-      end
-      memoize :tags
-      
-      def unique_tags
-        tags.uniq
-      end
-      
-      def tags_with_frequencies
-        returning Hash.new do |hash|
-          tags.each do |tag|
-            hash[tag] ||= 0
-            hash[tag] += 1
-          end
-        end
-      end
-      memoize :tags_with_frequencies
-      
     protected
       def create_default_views
         index_view
         archive_view
         category_view
-        tag_view
         post_view
       end
       

@@ -1,20 +1,21 @@
 module Breeze
   module Blog
     class PostView < ArchiveView
-      attr_accessor :slug
+      attr_accessor :permalink
       attr_accessor :comment
       attr_accessor :preview_only
       
-      def set_url_params(match)
+      def set_url_params(permalink)
         super
-        @preview_only = match[12].present?
-        self.slug = match[9] || match[12]
+        self.permalink = permalink
       end
       
       alias_method :preview_only?, :preview_only
       
       def posts
-        (preview_only? ? blog.posts : super).where(:slug => slug)
+        require 'pry'
+        binding.pry
+        (controller.admin_signed_in? ? blog.posts : blog.posts.published).where(:permalink => permalink)
       end
       
       def post

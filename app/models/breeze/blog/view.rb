@@ -13,13 +13,13 @@ module Breeze
         (request && request.params[:page]) || 1
       end
       
-      def with_url_params(match)
+      def with_url_params(permalink)
         returning dup do |view|
-          view.set_url_params(match)
+          view.set_url_params(permalink)
         end
       end
       
-      def set_url_params(match)
+      def set_url_params(permalink)
       end
       
       def template

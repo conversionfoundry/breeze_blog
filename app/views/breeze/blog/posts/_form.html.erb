@@ -13,8 +13,14 @@
 		    
 		    <%= form.fieldset :legend => "Summary", :id => "post_summary_fieldset", :class => "collapsible#{" collapsed" if @post.intro.blank?}" do %>
 				  <%= form.text_area :intro, :label => false, :rows => 6, :class => "markup", :hint => "Enter a brief summary (about #{blog.post_summary_length} words) of your post, to be displayed on index, archive, and category pages" %> 
-		    <% end %>
-		  <% end %>
+        <% end %>
+
+        <%= form.fieldset :legend => "SEO" do %>
+          <%= form.text_field :seo_title %>
+          <%= form.text_field :seo_meta_description %>
+          <%= form.text_field :seo_meta_keywords %>
+        <% end %>
+      <% end %>
 
 		  <%= fake_right_sidebar do %>
 		    <%= scrollable_layout do %>
@@ -33,16 +39,10 @@
   			  <%= submit_tag "Save", :class => "large green save button" %>
   			  <%= link_to "View", @post.draft_permalink, :class => "large view button", :target => :_blank unless @post.new_record? %>
 			  
-  			  <%= hidden_field_tag "post[category_ids][]", "" %>
-  			  <%= form.fieldset :legend => "Categories", :class => "post-categories" do %>
-  			    <% blog.categories.ascending(:position).each do |category| %>
-  			      <li><%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), :id => "post_category_ids_#{category.id}" %> <%= label_tag "post_category_ids_#{category.id}", category %></li>
-  			    <% end %>
-  			  <% end %>
+          <%= form.fieldset :legend => "", :class => "post-categories" do %>
+            <%= form.select :category_id, blog.categories.ascending(:position).collect{|c| [ c.name, c._id ] }, :required => true %>
+          <% end %>
 			  
-  			  <%= form.fieldset :legend => "Tags", :class => "post-tags" do %>
-  			    <%= form.text_field :tags, :label => false, :value => form.object.tags.join(", "), :hint => "Press <strong>Return</strong> after each new tag".html_safe, :wrap => { :class => "tag-list" } %>
-  			  <% end %>
   			<% end %>
 		  <% end %>
 		<% end %>
@@ -132,8 +132,6 @@
     }).change().find('option').each(function() {
       $(this).text($(this).text().replace(/ [AP]M$/i, ''));
     });
-    
-    new $.TextboxList('#post_tags', { });
     
     $('#post_summary_fieldset.collapsed').find('ol.form').hide();
     $('#post_summary_fieldset legend').click(function() {

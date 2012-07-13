@@ -14,7 +14,6 @@
             <%= at_a_glance blog.posts.pending.count, "post(s) scheduled for publication", admin_blog_posts_path + "#tab_pending" %>
             <%= at_a_glance blog.posts.draft.count, "draft(s)", admin_blog_posts_path + "#tab_draft" %>
             <%= at_a_glance blog.categories.count, "category(s)", admin_blog_settings_path + "#tab_categories" %>
-            <%= at_a_glance blog.unique_tags.count, "tag(s)" %>
           </table>
           <p><%= last_published(blog) %></p>
         </div>
@@ -28,11 +27,6 @@
             <%= at_a_glance blog.comments.spam.count, "comment(s) marked as spam", admin_blog_comments_path + "#tab_spam" %>
           </table>
           <p>Replying to comments encourages discussion by letting your visitors know you read and value their contributions.</p>
-        </div>
-      
-        <div id="tags" class="box col3">
-          <h2>Your tags</h2>
-          <%= tag_cloud blog %>
         </div>
       
         <div id="recent-comments" class="box col3">

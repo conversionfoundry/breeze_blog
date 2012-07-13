@@ -16,7 +16,7 @@ module Breeze
         end
       end
       has_many_related :categories, :class_name => "Breeze::Blog::Category", :stored_as => :array
-      field :tags, :type => Array, :default => lambda { [] }
+      belongs_to_related :category, :class_name => "Breeze::Blog::Category"
       
       field :title
       field :slug
@@ -24,6 +24,11 @@ module Breeze
       field :intro, :markdown => true
       field :published_at, :type => Time
       field :comments_count, :type => Integer, :default => 0
+
+      # newly added seo fields
+      field :seo_title
+      field :seo_meta_description
+      field :seo_meta_keywords
       
       validates_presence_of :title, :slug, :body
       validates_presence_of :author_id, :message => "must be selected"
@@ -148,12 +153,6 @@ module Breeze
         write_attribute :category_ids, Array(values).reject(&:blank?)
       end
       
-      def tags=(values)
-        write_attribute :tags, (Array(values).map { |tag|
-          tag.split(/[ \n\t]*,[ \n\t]*/).map { |t| t.strip }
-        }.flatten.reject(&:blank?).sort.uniq)
-      end
-      
       def process(attrs={})
         # TODO: this probably belongs somewhere else
         attributes = returning({}) do |hash|
@@ -189,7 +188,7 @@ module Breeze
       
     protected
       def regenerate_permalink!
-        self.permalink = "#{blog.permalink}#{date_part}/#{slug}" unless blog.nil? || slug.blank?
+        self.permalink = "#{blog.permalink}/#{category.slug}/#{slug}" unless blog.nil? || slug.blank?
       end
       
       def date_part
