@@ -13,8 +13,6 @@ module Breeze
       alias_method :preview_only?, :preview_only
       
       def posts
-        require 'pry'
-        binding.pry
         (controller.admin_signed_in? ? blog.posts : blog.posts.published).where(:permalink => permalink)
       end
       
