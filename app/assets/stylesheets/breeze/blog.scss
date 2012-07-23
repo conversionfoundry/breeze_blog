@@ -635,7 +635,7 @@ table.comments img.gravatar,
   width: 184px;
   height: 28px;
   margin: 0px 0px 8px;
-  background-image: url(/breeze/images/publish-toggle.png);
+  background-image: url( image-path("breeze/publish-toggle.png") );
   background-repeat: no-repeat;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -803,7 +803,7 @@ fieldset.collapsible {
 fieldset.collapsible legend {
   cursor: pointer;
   padding-left: 20px;
-  background: url(../images/collapse.png) no-repeat 0px -24px;
+  background: url( image-path("breeze/collapse.png") ) no-repeat 0px -24px;
 }
 
 fieldset.collapsed legend {

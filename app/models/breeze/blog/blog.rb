@@ -31,6 +31,7 @@ module Breeze
       end
       
       def view_from_permalink(permalink)
+        # Get array of matches to permalink regex
         match = Breeze::Blog::PERMALINK.match(permalink) || {}
         view = if match[3] # year/month/day
           if match[9] # slug

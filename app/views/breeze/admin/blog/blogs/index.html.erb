@@ -1,10 +1,10 @@
 <% content_for :title, "Blog" %>
 
-<% pane_layout do |panes| %>
-  <% panes.header do %>
+<%= pane_layout do |panes| %>
+  <%= panes.header do %>
     <%= link_to "New blog post", new_admin_blog_post_path, :class => "large new blog_post button" %>
   <% end -%>
-  <% panes.inner do %>
+  <%= panes.inner do %>
     <%= scrollable_layout do %>
       <div id="blog_dashboard">
         <div id="posts" class="box col3">
@@ -47,7 +47,7 @@
       </div>
     <% end %>
   <% end %>
-  <% panes.footer do %>
+  <%= panes.footer do %>
     
   <% end %>
 <% end %>
@@ -57,7 +57,7 @@
 <% end %>
 
 <% content_for :head do %>
-  <%= javascript_include_tag "/breeze/javascripts/masonry.js" %>
+  <%= javascript_include_tag asset_path("breeze/masonry.js") %>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">

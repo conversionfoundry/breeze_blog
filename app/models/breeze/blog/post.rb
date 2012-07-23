@@ -154,7 +154,8 @@ module Breeze
         }.flatten.reject(&:blank?).sort.uniq)
       end
       
-      def process(attrs={})
+      # TODO: second and third are placeholders to give the right number of arguments
+      def process(attrs={}, second, third)
         # TODO: this probably belongs somewhere else
         attributes = ({}).tap do |hash|
           indexed = {}

@@ -1,5 +1,5 @@
 <%= pane_layout do |main| %>
-	<% main.inner do %>
+	<%= main.inner do %>
 		<%= breeze_form_for @post, :as => :post, :url => url do |form| %>
 		  <%= scrollable_layout do %>
 		    <h1><%= @post.new_record? ? 'New' : 'Edit' %> post</h1>
@@ -50,7 +50,7 @@
 <% end %>
 
 <% content_for :left do %>
-  <%= render :partial => "/breeze/blog/blogs/left" %>
+  <%= render :partial => "/breeze/admin/blog/blogs/left" %>
 <% end %>
 
 <% content_for :right do %>
@@ -62,8 +62,8 @@
 <% end %>
 
 <% content_for :head do %>
-  <%= stylesheet_link_tag "/breeze/javascripts/marquess/marquess.css" %>
-  <%= javascript_include_tag "/breeze/javascripts/marquess/marquess.js", "/breeze/javascripts/blog.js" %>
+  <%= stylesheet_link_tag asset_path("breeze/marquess/marquess.css") %>
+  <%= javascript_include_tag asset_path("breeze/marquess/marquess.js"), asset_path("breeze/blog.js") %>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">

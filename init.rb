@@ -20,6 +20,11 @@ Breeze.hook :get_content_by_permalink do |permalink_or_content|
   end
 end
 
-#Rails.application.config.to_prepare do
-  #Breeze::Controller.helper Breeze::Blog::BlogHelper
-#end
+Breeze.hook :component_info do |component_info|
+  component_info << {:name => 'Breeze Blog', :version => Breeze::Blog::VERSION }
+end
+
+# Rails.application.config.to_prepare do
+#   Breeze::Controller.helper Breeze::Blog::BlogHelper
+# end
+

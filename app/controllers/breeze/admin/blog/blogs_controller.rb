@@ -7,7 +7,7 @@ module Breeze
         end
         
         def setup_default
-          @blog = Blog.new :title => "Blog", :parent_id => Breeze::Content::NavigationItem.root.first.try(:id)
+          @blog = Breeze::Blog::Blog.new :title => "Blog", :parent_id => Breeze::Content::NavigationItem.root.first.try(:id)
           @blog.save!
           redirect_to admin_blog_root_path
         end
