@@ -32,15 +32,15 @@ module Breeze
       end
       
       def view_from_permalink(permalink)
-        count = permalink.count('/')
-        view = if count <= 1
+        view = case permalink
+        when "/blog"
           index_view
-        elsif count <= 2
+        when /\/blog\/category\/.*$/
           category_view
         else
           post_view
         end
-        
+
         view.with_url_params permalink
       end
       
