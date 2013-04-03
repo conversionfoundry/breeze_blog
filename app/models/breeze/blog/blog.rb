@@ -35,6 +35,8 @@ module Breeze
         view = case permalink
         when "/blog"
           index_view
+        when "/"
+          index_view
         when /\/blog\/category\/.*$/
           category_view
         else
