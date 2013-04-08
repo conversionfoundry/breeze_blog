@@ -13,8 +13,6 @@ module Breeze
       end
       
       def posts
-        require 'pry'
-        binding.pry
         super.where :category_id => category.try(:id)
       end
       
