@@ -27,20 +27,23 @@ module Breeze
             view.with_url_params Breeze::Blog::PERMALINK.match(permalink)
           end
         else  
-          view_from_permalink request.path
+          # permalink = request.path + request.params[:path]
+          permalink = "/" + request.params[:path]
+          view_from_permalink permalink
         end
       end
       
       def view_from_permalink(permalink)
-        count = permalink.count('/')
-        view = if count <= 1
+        view = case permalink
+        when "/blog"
           index_view
-        elsif count <= 2
+        when "/"
+          index_view
+        when /\/blog\/.*$/
           category_view
         else
           post_view
         end
-        
         view.with_url_params permalink
       end
       
