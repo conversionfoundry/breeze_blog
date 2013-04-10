@@ -39,7 +39,7 @@ module Breeze
           index_view
         when "/"
           index_view
-        when /\/blog\/.*$/
+        when /\/blog\/categories\/.*$/
           category_view
         else
           post_view
