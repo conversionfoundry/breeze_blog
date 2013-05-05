@@ -11,7 +11,7 @@
           <h2>Your posts</h2>
           <table class="at-a-glance">
             <%= at_a_glance blog.posts.published.count, "public post(s)", admin_blog_posts_path + "#tab_published" %>
-            <%= at_a_glance blog.posts.pending.count, "post(s) scheduled for publication", admin_blog_posts_path + "#tab_pending" %>
+            <%= at_a_glance blog.posts.scheduled.count, "post(s) scheduled for publication", admin_blog_posts_path + "#tab_pending" %>
             <%= at_a_glance blog.posts.draft.count, "draft(s)", admin_blog_posts_path + "#tab_draft" %>
             <%= at_a_glance blog.categories.count, "category(s)", admin_blog_settings_path + "#tab_categories" %>
           </table>
@@ -28,7 +28,7 @@
           </table>
           <p>Replying to comments encourages discussion by letting your visitors know you read and value their contributions.</p>
         </div>
-      
+
         <div id="recent-comments" class="box col3">
           <h2>Recent comments</h2>
           <% if @recent_comments.any? %>
@@ -42,7 +42,7 @@
     <% end %>
   <% end %>
   <% panes.footer do %>
-    
+
   <% end %>
 <% end %>
 
@@ -57,7 +57,7 @@
 <script type="text/javascript" charset="utf-8">
   $(function() {
     $('#blog_dashboard').masonry({
-      columnWidth: 128, 
+      columnWidth: 128,
       itemSelector: '.box',
       animate: true,
       animationOptions: {
@@ -65,7 +65,7 @@
         easing: 'easeOutCubic'
       }
     });
-    
+
     $('#recent-comments .comment .reply').live('click', function() {
       $.get(this.href, function(data) {
         $('<div></div>').html(data).dialog({
