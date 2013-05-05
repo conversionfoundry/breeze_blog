@@ -27,7 +27,9 @@ module Breeze
             view.with_url_params Breeze::Blog::PERMALINK.match(permalink)
           end
         else  
-          view_from_permalink request.path
+          # permalink = request.path + request.params[:path]
+          permalink = "/" + request.params[:path]
+          view_from_permalink permalink
         end
       end
       
@@ -42,7 +44,10 @@ module Breeze
         else
           post_view
         end
+<<<<<<< HEAD
 
+=======
+>>>>>>> 18f92ed3ba8175b60cbe561afdd15c4821a1a115
         view.with_url_params permalink
       end
       

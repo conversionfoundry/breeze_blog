@@ -17,7 +17,7 @@ module Breeze
       def to_s; name; end
       
       def regenerate_permalink!
-        self.permalink = "#{blog.permalink}/#{slug}"
+        self.permalink = "#{blog.permalink}/categories/#{slug}"
       end
       
       def posts
